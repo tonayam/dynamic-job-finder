@@ -10,7 +10,8 @@
             text-align: center;
 
             .img {
-                height: 178px;
+                height: 126px;
+                width: 150px;
                 @include flex(center, center, row);
             }
 
@@ -138,6 +139,7 @@
 
                 .img {
                     height: 278px;
+                    width: auto;
                 }
             }
 
