@@ -1,0 +1,244 @@
+.navbar {
+    padding: 1rem 14px;
+    @include flex(center, space-between, row);
+    border-bottom: 1px solid $borderColor;
+
+    .logo {
+        width: 130px;
+        height: 40px;
+        border: 2px solid red;
+    }
+
+    .desktop-search,
+    .desktop-nav-items {
+        display: none;
+    }
+
+
+    .hamburger {
+        font-size: 1.5rem;
+        @include flex(center, center, row);
+
+        svg {
+            cursor: pointer;
+        }
+    }
+
+    .mobile-nav-items {
+        position: fixed;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        height: 100vh;
+        width: 100%;
+        background-color: #fff;
+        padding: 1.5rem 0;
+        transform: translateX(100%);
+        transition: linear 0.3s all;
+
+        &.show {
+            transform: translateX(0);
+        }
+
+        .close-btn {
+            @include flex(center, flex-end, row);
+            font-size: 1.5rem;
+            margin-bottom: 3rem;
+            padding: 0 14px;
+
+            svg {
+                cursor: pointer;
+            }
+        }
+
+        ul {
+            li {
+                padding: 1rem 14px;
+                border-bottom: 1px solid #989292;
+                text-transform: capitalize;
+            }
+        }
+
+        .divider {
+            width: 100%;
+            height: 6px;
+            background: $greyColor1;
+        }
+
+        p {
+            padding: 0 14px;
+            margin-top: 1rem;
+            cursor: pointer;
+        }
+    }
+}
+
+@include for-phone-only {
+    .navbar {
+        padding: 1rem 24px;
+
+        .mobile-nav-items {
+            .close-btn {
+                padding: 0 24px;
+            }
+
+            ul {
+                li {
+                    padding: 1rem 24px;
+                }
+            }
+
+            p {
+                padding: 0 24px;
+            }
+        }
+    }
+}
+
+@include for-tablet-potrait-up {
+    .navbar {
+        padding: 1rem 40px;
+
+        .mobile-nav-items {
+            .close-btn {
+                padding: 0 40px;
+            }
+
+            ul {
+                li {
+                    padding: 1rem 40px;
+                }
+            }
+
+            p {
+                padding: 0 40px;
+            }
+        }
+    }
+}
+
+@include for-tablet-landscape-up {
+    .navbar {
+        padding: 1rem 60px;
+
+        .mobile-nav-items {
+            .close-btn {
+                padding: 0 60px;
+            }
+
+            ul {
+                li {
+                    padding: 1rem 60px;
+                }
+            }
+
+            p {
+                padding: 0 60px;
+            }
+        }
+    }
+}
+
+@include for-desktop-up {
+    .navbar {
+        padding: 1rem 115px;
+
+        .desktop-search {
+            @include flex(center, space-between, row);
+            border: 1px solid $borderColor;
+            border-radius: 10px;
+            width: 500px;
+            height: 50px;
+
+
+            input {
+                border: none;
+                border-radius: 0;
+                padding: 1rem 1rem;
+                border: none;
+                outline: none;
+                border-radius: 10px 0 0 10px;
+                width: 100%
+            }
+
+            .search-btn {
+                @include flex(center, center, row);
+                background-color: $primaryColor;
+                height: 100%;
+                padding: 0.5rem;
+                border-radius: 0 10px 10px 0;
+                cursor: pointer;
+
+                svg {
+                    font-size: 1.5rem;
+                    color: #fff;
+                }
+
+            }
+
+        }
+
+        .desktop-nav-items {
+            @include flex(center, center, row);
+
+            svg {
+                font-size: 1.5rem;
+                cursor: pointer;
+            }
+
+            .profile {
+                @include flex(center, center, row);
+                position: relative;
+
+                .items {
+                    border: 1px solid $borderColor;
+                    border-radius: 10px;
+                    position: absolute;
+                    right: -20px;
+                    top: 40px;
+                    background-color: #fff;
+                    padding: 1rem;
+                    text-transform: capitalize;
+                    width: 200px;
+                    display: none;
+
+                    &.show {
+                        display: block;
+                    }
+
+                    ul {
+                        li {
+                            margin-bottom: 0.5rem;
+
+                            &:hover {
+                                color: $secondaryColor;
+                            }
+                        }
+                    }
+
+                    p {
+                        cursor: pointer;
+
+                        &:hover {
+                            color: red;
+                        }
+                    }
+                }
+            }
+        }
+
+        .hamburger {
+            display: none;
+        }
+
+        .mobile-nav-items {
+            display: none;
+        }
+    }
+}
+
+@include for-big-desktop-up {
+    .navbar {
+        padding: 1rem 675px;
+    }
+}

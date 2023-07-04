@@ -3,9 +3,11 @@
 @import "./mixins";
 
 // COMPONENTS
+@import "../components/Navbar/navbar";
 
 // PAGES
 @import "../pages/Auth/auth";
+@import "../pages/Home/home";
 
 
 
