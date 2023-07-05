@@ -31,3 +31,48 @@ export const mobileNavLinksBatch2 = [
     link: `/`,
   },
 ];
+
+export const miniJobs = [
+  {
+    company: `Astrosoft`,
+    position: `Frontdesk Assistant`,
+    location: `Yenegoa, Bayelsa`,
+    timePosted: `1d`,
+  },
+  {
+    company: `Astrosoft`,
+    position: `Frontdesk Assistant`,
+    location: `Yenegoa, Bayelsa`,
+    timePosted: `1d`,
+  },
+  {
+    company: `Astrosoft`,
+    position: `Frontdesk Assistant`,
+    location: `Yenegoa, Bayelsa`,
+    timePosted: `1d`,
+  },
+  {
+    company: `Astrosoft`,
+    position: `Frontdesk Assistant`,
+    location: `Yenegoa, Bayelsa`,
+    timePosted: `1d`,
+  },
+  {
+    company: `Astrosoft`,
+    position: `Frontdesk Assistant`,
+    location: `Yenegoa, Bayelsa`,
+    timePosted: `1d`,
+  },
+  {
+    company: `Astrosoft`,
+    position: `Frontdesk Assistant`,
+    location: `Yenegoa, Bayelsa`,
+    timePosted: `1d`,
+  },
+  {
+    company: `Astrosoft`,
+    position: `Frontdesk Assistant`,
+    location: `Yenegoa, Bayelsa`,
+    timePosted: `1d`,
+  },
+];
