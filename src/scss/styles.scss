@@ -10,8 +10,10 @@
 // PAGES
 @import "../pages/Auth/auth";
 @import "../pages/Home/home";
+@import "../pages/Profile/profile";
 
-
+// NATIVE COMPONENTS
+@import "../pages/Profile/Tabs/tabs";
 
 * {
     box-sizing: border-box;

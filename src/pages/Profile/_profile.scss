@@ -1,0 +1,83 @@
+.profile-page {
+    .tab {
+        padding: 2rem 14px;
+        margin-bottom: 1rem;
+
+        .desktop-tabs {
+            display: none;
+        }
+
+        select {
+            width: 50%;
+            height: 40px;
+            background-color: #fff;
+            border: 1px solid $borderColor;
+            color: #000;
+            text-transform: capitalize;
+        }
+    }
+}
+
+@include for-phone-only {}
+
+@include for-tablet-potrait-up {}
+
+@include for-tablet-landscape-up {}
+
+@include for-desktop-up {
+    .profile-page {
+        @include flex(center, space-between, row);
+        height: calc(100vh - 80px);
+
+        .tab {
+            height: 100%;
+            width: 25%;
+            margin-bottom: 0;
+            padding: 2rem 0 2rem 32px;
+
+            select {
+                display: none;
+            }
+
+            .desktop-tabs {
+                @include flex(flex-start, flex-start, column);
+
+                .my-profile,
+                .my-account {
+                    @include flex(flex-start, center, column);
+                    width: 100%;
+                    margin-bottom: 1rem;
+
+                    h2 {
+                        font-size: 1.5rem;
+                        margin-bottom: 1rem;
+                        font-weight: 500;
+                    }
+
+                    h5 {
+                        font-size: 1rem;
+                        font-weight: 400;
+                        display: flex;
+                        cursor: pointer;
+                        width: 100%;
+                        margin-bottom: 1rem;
+                        border-bottom: 1px solid $borderColor;
+                        padding-bottom: 0.5rem;
+
+                        &.active {
+                            border-bottom: 2px solid $secondaryColor;
+                        }
+                    }
+                }
+            }
+        }
+
+        .tab-content {
+            width: 70%;
+            height: 100%;
+            overflow-y: scroll;
+        }
+    }
+}
+
+@include for-big-desktop-up {}

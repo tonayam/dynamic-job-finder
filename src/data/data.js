@@ -16,7 +16,7 @@ export const mobileNavLinksBatch1 = [
 export const mobileNavLinksBatch2 = [
   {
     name: `profile`,
-    link: `/`,
+    link: `/my-profile`,
   },
   {
     name: `my jobs`,
@@ -75,4 +75,17 @@ export const miniJobs = [
     location: `Yenegoa, Bayelsa`,
     timePosted: `1d`,
   },
+];
+
+// PROFILE PAGE TABS
+export const profileTabs = [
+  `My Account`,
+  `My Profile`,
+  `Subscriptions`,
+  `My Resume`,
+  `Applied Jobs`,
+  `Job Alerts`,
+  `Messages`,
+  `Meetings`,
+  `Change Password`,
 ];
