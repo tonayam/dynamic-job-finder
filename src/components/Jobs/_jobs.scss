@@ -14,12 +14,13 @@
             top: 0;
             left: 0;
             width: 100%;
+            @include flex(center, center, row);
         }
 
         .jobs {
             @include flex(flex-start, space-between, row);
             height: 100%;
-            padding-top: 2.5rem;
+            padding-top: 4.5rem;
 
             .jobs-list {
                 width: 100%;
@@ -70,65 +71,6 @@
                     }
                 }
             }
-
-            .job-info {
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                background-color: #fff;
-                height: 100vh;
-                transform: translateX(100%);
-                transition: 0.3s linear all;
-                padding: 1.5rem 14px;
-                z-index: 10;
-
-                &.show {
-                    transform: translateX(0);
-                }
-
-                .close-btn {
-                    @include flex(center, flex-end, row);
-                    margin-bottom: 2rem;
-
-                    svg {
-                        font-size: 1.5rem;
-                    }
-                }
-
-                .info {
-                    padding: 0.5rem 0;
-
-                    .company-position {
-                        h4 {
-                            margin-bottom: 0.5rem;
-                            font-weight: 400;
-                        }
-
-                        h1 {
-                            font-size: clamp(1.2rem, 4vw, 2rem);
-                        }
-
-                        .location-date {
-                            @include flex(center, space-between, row);
-                            margin-bottom: 1rem;
-
-                            h6 {
-                                font-size: clamp(0.8rem, 2vw, 1rem);
-                                font-weight: 400;
-                            }
-                        }
-
-                        .btns {
-                            @include flex(center, space-between, row);
-
-                            button {
-                                width: 48%;
-                            }
-                        }
-                    }
-                }
-            }
         }
     }
 }
@@ -141,7 +83,7 @@
 
 @include for-desktop-up {
     .jobs-container {
-        padding: 2rem 115px;
+        padding: 2rem 115px 0 115px;
         height: calc(100vh - 80px);
 
         .box {
@@ -152,21 +94,6 @@
             .jobs {
                 .jobs-list {
                     width: 40%;
-                }
-
-                .job-info {
-                    position: static;
-                    width: 60%;
-                    height: 100%;
-                    background-color: transparent;
-                    @include flex(center, center, row);
-                    transform: translateX(0);
-
-                    .close-btn {
-                        border: 2px solid red;
-                        display: none;
-                    }
-
                 }
             }
         }

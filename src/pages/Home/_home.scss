@@ -1,1 +1,12 @@
 .home-page {}
+
+
+@include for-phone-only {}
+
+@include for-tablet-potrait-up {}
+
+@include for-tablet-landscape-up {}
+
+@include for-desktop-up {}
+
+@include for-big-desktop-up {}

@@ -1,14 +1,18 @@
-import React, { useState } from 'react';
-import { RiCloseFill } from 'react-icons/ri';
+import React from 'react';
 import { miniJobs } from '../../data/data';
+import JobDetails from '../Job-Details/JobDetails';
+import { useGlobalContext } from '../../context/context';
 
 const Jobs = () => {
-  const [showJobDetails, setShowJobDetails] = useState(false);
+  const { setShowJobDetails } = useGlobalContext();
 
   return (
     <section className='jobs-container'>
       <div className='box'>
-        <div className='filters'></div>
+        {/* JOB FILTERS */}
+        <div className='filters'>Filter component here</div>
+
+        {/* JOB LISTINGS AND INFORMATIONS */}
         <div className='jobs'>
           <div className='jobs-list'>
             {miniJobs.map((job, jobIndex) => {
@@ -33,29 +37,9 @@ const Jobs = () => {
               );
             })}
           </div>
-          <div className={`job-info ${showJobDetails && `show`}`}>
-            <div className='close-btn'>
-              <RiCloseFill onClick={() => setShowJobDetails(false)} />
-            </div>
-            <div className='info'>
-              <div className='company-position'>
-                <h4>Astrosoft</h4>
-                <h1>Frontdesk Assistant</h1>
-                <div className='location-date'>
-                  <h6>Yenegoa, bayelsa</h6>
-                  <h6>20d+</h6>
-                </div>
-                <div className='btns'>
-                  <button className='blue'>Apply</button>
-                  <button className='transparent'>Save</button>
-                </div>
-              </div>
 
-              {/* JOB DESCRIPTION */}
-            </div>
-
-            <div className='job-overview'></div>
-          </div>
+          {/* JOB DETAILS */}
+          <JobDetails />
         </div>
       </div>
     </section>
