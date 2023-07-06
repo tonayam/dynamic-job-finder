@@ -37,6 +37,24 @@ const Jobs = () => {
             <div className='close-btn'>
               <RiCloseFill onClick={() => setShowJobDetails(false)} />
             </div>
+            <div className='info'>
+              <div className='company-position'>
+                <h4>Astrosoft</h4>
+                <h1>Frontdesk Assistant</h1>
+                <div className='location-date'>
+                  <h6>Yenegoa, bayelsa</h6>
+                  <h6>20d+</h6>
+                </div>
+                <div className='btns'>
+                  <button className='blue'>Apply</button>
+                  <button className='transparent'>Save</button>
+                </div>
+              </div>
+
+              {/* JOB DESCRIPTION */}
+            </div>
+
+            <div className='job-overview'></div>
           </div>
         </div>
       </div>
