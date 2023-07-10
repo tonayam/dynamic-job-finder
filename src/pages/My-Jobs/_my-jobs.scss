@@ -1,0 +1,109 @@
+.my-jobs-page {
+    .headers {
+        padding: 2rem 14px;
+        margin-bottom: 1rem;
+
+        h1 {
+            font-weight: 500;
+            font-size: clamp(1.5rem, 5vw, 1.8rem);
+            margin-bottom: 1.5rem;
+        }
+
+        ul {
+            @include flex(center, flex-start, row);
+            border-bottom: 1px solid $borderColor;
+
+            li {
+                padding: 0.5rem 0;
+                cursor: pointer;
+                font-weight: 500;
+
+                &.active {
+                    border-bottom: 2px solid $secondaryColor;
+                }
+
+                &:first-child {
+                    margin-right: 2rem;
+                }
+            }
+        }
+    }
+
+    .jobs-container {
+        padding: 0 14px;
+        @include flex(flex-start, space-between, row);
+
+        .jobs-list {
+            width: 100%;
+            overflow-y: scroll;
+            height: 100%;
+        }
+    }
+}
+
+@include for-phone-only {
+    .my-jobs-page {
+        .headers {
+            padding: 2rem 24px;
+        }
+
+        .jobs-container {
+            padding: 0 24px;
+        }
+    }
+}
+
+@include for-tablet-potrait-up {
+    .my-jobs-page {
+        .headers {
+            padding: 2rem 40px;
+        }
+
+        .jobs-container {
+            padding: 0 40px;
+
+            .jobs-list {
+                select {
+                    width: 20%;
+                    padding: 0 0.5rem;
+                }
+            }
+        }
+    }
+}
+
+@include for-tablet-landscape-up {
+    .my-jobs-page {
+        .headers {
+            padding: 2rem 60px;
+        }
+
+        .jobs-container {
+            padding: 0 60px;
+        }
+    }
+}
+
+@include for-desktop-up {
+    .my-jobs-page {
+        .headers {
+            padding: 2rem 60px;
+        }
+
+        .jobs-container {
+            padding: 0 40px;
+            height: 100vh;
+
+            .jobs-list {
+                width: 40%;
+                padding-right: 1rem;
+
+                select {
+                    width: 20%;
+                }
+            }
+        }
+    }
+}
+
+@include for-big-desktop-up {}

@@ -1,5 +1,38 @@
-.home-page {}
+.home-page {
+    .available-jobs-container {
+        height: calc(100vh - 40px);
+        background-color: $borderColor;
 
+        .box {
+            height: 100%;
+            background-color: #fff;
+            position: relative;
+
+            .filters {
+                border: 2px solid green;
+                padding: 1rem 0;
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                @include flex(center, center, row);
+            }
+
+            .jobs {
+                @include flex(flex-start, space-between, row);
+                height: 100%;
+                padding-top: 4.5rem;
+
+                .jobs-list {
+                    width: 100%;
+                    padding: 1rem 14px;
+                    overflow-y: scroll;
+                    height: 100%;
+                }
+            }
+        }
+    }
+}
 
 @include for-phone-only {}
 
@@ -7,6 +40,25 @@
 
 @include for-tablet-landscape-up {}
 
-@include for-desktop-up {}
+@include for-desktop-up {
+    .home-page {
+        .available-jobs-container {
+            padding: 2rem 60px 0 60px;
+            height: calc(100vh - 80px);
+
+            .box {
+                .filters {
+                    border: 2px solid green;
+                }
+
+                .jobs {
+                    .jobs-list {
+                        width: 40%;
+                    }
+                }
+            }
+        }
+    }
+}
 
 @include for-big-desktop-up {}

@@ -1,79 +1,141 @@
-.jobs-container {
-    height: calc(100vh - 40px);
-    background-color: $borderColor;
+// JOB COMPONENT ON JOB LISTING PAGE (HOME PAGE)
+.job-listing-job {
+    padding: 1rem;
+    cursor: pointer;
+    border: 1px solid $borderColor;
+    border-radius: 10px;
+    margin-bottom: 1.5rem;
 
-    .box {
-        height: 100%;
-        background-color: #fff;
-        position: relative;
+    &:hover {
+        border-color: $primaryColor;
+    }
 
-        .filters {
-            border: 2px solid green;
-            padding: 1rem 0;
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            @include flex(center, center, row);
+    .company {
+        margin-bottom: 0.7rem;
+
+        h2 {
+            font-size: clamp(0.9rem, 4vw, 1rem);
+        }
+    }
+
+    .position {
+        h3 {
+            font-size: clamp(1rem, 4vw, 1.2rem);
+            font-weight: 500;
+        }
+    }
+
+    .location-time {
+        @include flex(center, space-between, row);
+
+        h5 {
+            text-transform: capitalize;
+            font-size: clamp(0.8rem, 2vw, 0.9rem);
+            font-weight: 400;
         }
 
-        .jobs {
-            @include flex(flex-start, space-between, row);
-            height: 100%;
-            padding-top: 4.5rem;
-
-            .jobs-list {
-                width: 100%;
-                padding: 1rem 14px;
-                overflow-y: scroll;
-                height: 100%;
-
-                .job {
-                    padding: 0.5rem 1rem;
-                    cursor: pointer;
-                    border: 1px solid $borderColor;
-                    border-radius: 10px;
-                    margin-bottom: 1.5rem;
-
-                    &:hover {
-                        border-color: $primaryColor;
-                    }
-
-
-                    .company {
-                        margin-bottom: 0.7rem;
-
-                        h2 {
-                            font-size: clamp(0.9rem, 4vw, 1rem);
-                        }
-                    }
-
-                    .position {
-                        h3 {
-                            font-size: clamp(1rem, 4vw, 1.2rem);
-                            font-weight: 500;
-                        }
-                    }
-
-
-                    .location-time {
-                        @include flex(center, space-between, row);
-
-                        h5 {
-                            text-transform: capitalize;
-                            font-size: clamp(0.8rem, 2vw, 0.9rem);
-                            font-weight: 400;
-                        }
-
-                        span {
-                            font-size: clamp(0.8rem, 2vw, 0.9rem);
-                        }
-                    }
-                }
-            }
+        span {
+            font-size: clamp(0.8rem, 2vw, 0.9rem);
         }
     }
 }
+
+//  JOB COMPONENT FOR APPLIED JOBS
+.applied-job {
+    padding: 1rem;
+    cursor: pointer;
+    border: 1px solid $borderColor;
+    border-radius: 10px;
+    margin-bottom: 1.5rem;
+
+    &:hover {
+        border-color: $primaryColor;
+    }
+
+    .company-status {
+        margin-bottom: 0.7rem;
+        @include flex(center, space-between, row);
+
+        h2 {
+            font-size: clamp(0.9rem, 4vw, 1rem);
+            font-weight: 400;
+        }
+
+        select {
+            border-radius: 5px;
+            height: 40px;
+            background-color: #fff;
+            color: #000;
+            border: 1px solid $borderColor;
+            width: 35%;
+            outline: none;
+        }
+    }
+
+    .position {
+        h3 {
+            font-size: clamp(1rem, 4vw, 1.2rem);
+            font-weight: 500;
+        }
+    }
+
+    .location-time {
+        @include flex(center, space-between, row);
+
+        h5 {
+            text-transform: capitalize;
+            font-size: clamp(0.8rem, 2vw, 0.9rem);
+            font-weight: 400;
+        }
+
+        span {
+            font-size: clamp(0.8rem, 2vw, 0.9rem);
+        }
+    }
+}
+
+// JOB COMPONENT FOR SAVED JOBS
+.saved-job {
+    padding: 1rem;
+    cursor: pointer;
+    border: 1px solid $borderColor;
+    border-radius: 10px;
+    margin-bottom: 1.5rem;
+
+    &:hover {
+        border-color: $primaryColor;
+    }
+
+    .company {
+        margin-bottom: 0.7rem;
+
+        h2 {
+            font-size: clamp(0.9rem, 4vw, 1rem);
+        }
+    }
+
+    .position {
+        h3 {
+            font-size: clamp(1rem, 4vw, 1.2rem);
+            font-weight: 500;
+        }
+    }
+
+    .location-time {
+        @include flex(center, space-between, row);
+
+        h5 {
+            text-transform: capitalize;
+            font-size: clamp(0.8rem, 2vw, 0.9rem);
+            font-weight: 400;
+        }
+
+        span {
+            font-size: clamp(0.8rem, 2vw, 0.9rem);
+        }
+    }
+}
+
 
 @include for-phone-only {}
 
@@ -81,23 +143,6 @@
 
 @include for-tablet-landscape-up {}
 
-@include for-desktop-up {
-    .jobs-container {
-        padding: 2rem 60px 0 60px;
-        height: calc(100vh - 80px);
-
-        .box {
-            .filters {
-                border: 2px solid green;
-            }
-
-            .jobs {
-                .jobs-list {
-                    width: 40%;
-                }
-            }
-        }
-    }
-}
+@include for-desktop-up {}
 
 @include for-big-desktop-up {}

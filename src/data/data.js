@@ -20,7 +20,7 @@ export const mobileNavLinksBatch2 = [
   },
   {
     name: `my jobs`,
-    link: `/`,
+    link: `/my-jobs`,
   },
   {
     name: `settings`,

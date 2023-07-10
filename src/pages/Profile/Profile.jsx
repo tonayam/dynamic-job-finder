@@ -1,65 +1,114 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Navbar from '../../components/Navbar/Navbar';
-import { profileTabs } from '../../data/data';
-import { useNavigate } from 'react-router-dom';
-import { ProfileTab } from './Tabs/Tabs';
+import Sidebar from '../../components/Sidebar/Sidebar';
+import { BiUser } from 'react-icons/bi';
+import { RiEditCircleFill, RiEditLine } from 'react-icons/ri';
 
 const Profile = () => {
-  const navigate = useNavigate();
-  const [index, setIndex] = useState(0);
   return (
     <>
       <Navbar />
       <main className='profile-page'>
         {/* SIDEBAR */}
-        <div className='tab'>
-          {/* TAB OPTIONS FOR DESKTOP */}
-          <div className='desktop-tabs'>
-            <div className='my-profile'>
-              <h2>My Information</h2>
-              <h5 className='active'>Profile</h5>
-            </div>
-            <div className='my-account'>
-              <h2>My Account</h2>
-              <h5>Account Settings</h5>
-              <h5>Email Notification</h5>
-            </div>
-            <ul className='logout'>
-              <li
-                onClick={() => {
-                  navigate(`/`);
-                  localStorage.removeItem(`userInfo`);
-                }}
-              >
-                Logout
-              </li>
-            </ul>
+        <Sidebar activePage={`profile`} />
+
+        {/* PAGE CONTENT */}
+        <section className='page-content'>
+          {/* TITLES */}
+          <div className='titles-section'>
+            <h2 className='title'>Profile</h2>
+            <h2 className='sub-title'>Community Profile</h2>
+            <p>
+              This is how you will appear when you participate in conversations
+              on Dynamic Job Finder
+            </p>
           </div>
 
-          {/* TAB OPTIONS FOR MOBILE */}
-          <select
-            name='options'
-            id='options'
-            value={index}
-            onChange={(e) => setIndex(Number(e.target.value))}
-          >
-            {profileTabs.map((tab, tabIndex) => {
-              return (
-                <option
-                  key={tabIndex}
-                  className={tabIndex === index ? `active-tab` : null}
-                  value={tabIndex}
-                >
-                  {tab}
-                </option>
-              );
-            })}
-            <option>Logout</option>
-          </select>
-        </div>
+          {/* USER PROFILE IMAGE AND NAME */}
+          <div className='user'>
+            <div className='img'>
+              <BiUser />
+              <RiEditCircleFill className='edit' />
+            </div>
+            <div className='name'>
+              <h2>John Doe</h2>
+            </div>
+          </div>
 
-        {/* TAB CONTENT */}
-        <ProfileTab />
+          {/* EMPLOYMENT STATUS */}
+          <div className='employment-status'>
+            <span>Status</span>
+            <select name='status' id='status'>
+              <option value='employed' defaultChecked>
+                Employed
+              </option>
+              <option value='unemployed' defaultChecked>
+                Unemployed
+              </option>
+            </select>
+          </div>
+
+          {/* RELEVANT INFO */}
+          <div className='relevant-info'>
+            <div className='item'>
+              <h4 className='title'>Primary Industry</h4>
+              <div className='info'>
+                <p>Tech</p>
+                <RiEditLine />
+              </div>
+            </div>
+            <div className='item'>
+              <h4 className='title'>Industry Category</h4>
+              <div className='info'>
+                <p>Engineering</p>
+                <RiEditLine />
+              </div>
+            </div>
+            <div className='item'>
+              <h4 className='title'>Job title</h4>
+              <div className='info'>
+                <p>Frontend Developer</p>
+                <RiEditLine />
+              </div>
+            </div>
+            <div className='item'>
+              <h4 className='title'>Current Company</h4>
+              <div className='info'>
+                <p>Astrosoft groups</p>
+                <RiEditLine />
+              </div>
+            </div>
+            <div className='item'>
+              <h4 className='title'>Location</h4>
+              <div className='info'>
+                <p>Port Harcourt (Nigeria)</p>
+                <RiEditLine />
+              </div>
+            </div>
+          </div>
+
+          {/* JOB PREFERENCES */}
+          <div className='job-preferences'>
+            <h4 className='title'>Job Preferences</h4>
+            <p>
+              Tell us what you're looking for so we can customize your job
+              hunting experience!
+            </p>
+
+            <div className='remote-work'>
+              <input type='checkbox' />
+              <span>I am open to remote work</span>
+            </div>
+            <div className='desired-job-title'>
+              <div className='add'>+</div>
+              <span>Add desired job title</span>
+            </div>
+            <div className='desired-location'>
+              <div className='add'>+</div>
+              <span>Add desired job location</span>
+            </div>
+          </div>
+        </section>
       </main>
     </>
   );

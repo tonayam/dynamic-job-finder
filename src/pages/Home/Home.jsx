@@ -1,12 +1,40 @@
 import React from 'react';
 import Navbar from '../../components/Navbar/Navbar';
-import Jobs from '../../components/Jobs/Jobs';
+import { JobListingJob } from '../../components/Jobs/Jobs';
+import { miniJobs } from '../../data/data';
+import JobDetails from '../../components/Job-Details/JobDetails';
 
 const Home = () => {
   return (
     <main className='home-page'>
       <Navbar />
-      <Jobs />
+      <section className='available-jobs-container'>
+        <div className='box'>
+          {/* JOB FILTERS */}
+          <div className='filters'>Filter component here</div>
+
+          {/* JOB LISTINGS AND INFORMATIONS */}
+          <div className='jobs'>
+            <div className='jobs-list'>
+              {miniJobs.map((job, jobIndex) => {
+                const { company, location, position, timePosted } = job;
+                return (
+                  <JobListingJob
+                    key={jobIndex}
+                    company={company}
+                    location={location}
+                    position={position}
+                    timePosted={timePosted}
+                  />
+                );
+              })}
+            </div>
+
+            {/* JOB DETAILS */}
+            <JobDetails />
+          </div>
+        </div>
+      </section>
     </main>
   );
 };

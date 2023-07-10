@@ -1,49 +1,69 @@
-import React from 'react';
-import { miniJobs } from '../../data/data';
-import JobDetails from '../Job-Details/JobDetails';
 import { useGlobalContext } from '../../context/context';
+import { BsBookmarkFill } from 'react-icons/bs';
 
-const Jobs = () => {
+// JOB COMPONENT ON JOB LISTING PAGE (HOME PAGE)
+export const JobListingJob = ({ company, position, location, timePosted }) => {
   const { setShowJobDetails } = useGlobalContext();
 
   return (
-    <section className='jobs-container'>
-      <div className='box'>
-        {/* JOB FILTERS */}
-        <div className='filters'>Filter component here</div>
-
-        {/* JOB LISTINGS AND INFORMATIONS */}
-        <div className='jobs'>
-          <div className='jobs-list'>
-            {miniJobs.map((job, jobIndex) => {
-              const { company, location, position, timePosted } = job;
-              return (
-                <div
-                  className='job'
-                  key={jobIndex}
-                  onClick={() => setShowJobDetails(true)}
-                >
-                  <div className='company'>
-                    <h2>{company}</h2>
-                  </div>
-                  <div className='position'>
-                    <h3>{position}</h3>
-                  </div>
-                  <div className='location-time'>
-                    <h5>{location}</h5>
-                    <span>{timePosted}</span>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-
-          {/* JOB DETAILS */}
-          <JobDetails />
-        </div>
+    <div className='job-listing-job' onClick={() => setShowJobDetails(true)}>
+      <div className='company'>
+        <h2>{company}</h2>
       </div>
-    </section>
+      <div className='position'>
+        <h3>{position}</h3>
+      </div>
+      <div className='location-time'>
+        <h5>{location}</h5>
+        <span>{timePosted}</span>
+      </div>
+    </div>
   );
 };
 
-export default Jobs;
+// JOB COMPONENT FOR APPLIED JOBS
+export const AppliedJob = ({ company, position, location, timePosted }) => {
+  const { setShowJobDetails } = useGlobalContext();
+
+  return (
+    <div className='applied-job' onClick={() => setShowJobDetails(true)}>
+      <div className='company-status'>
+        <h2>{company}</h2>
+        <select name='status' id='status'>
+          <option value='applied'>Applied</option>
+          <option value='applied'>Heard Back</option>
+          <option value='applied'>Interviewing</option>
+          <option value='applied'>Got Offer</option>
+          <option value='applied'>Landed Job</option>
+        </select>
+      </div>
+      <div className='position'>
+        <h3>{position}</h3>
+      </div>
+      <div className='location-time'>
+        <h5>{location}</h5>
+        <span>{timePosted}</span>
+      </div>
+    </div>
+  );
+};
+
+// JOB COMPONENT FOR SAVED JOBS
+export const SavedJob = ({ company, position, location, timePosted }) => {
+  const { setShowJobDetails } = useGlobalContext();
+
+  return (
+    <div className='saved-job' onClick={() => setShowJobDetails(true)}>
+      <div className='company'>
+        <h2>{company}</h2>
+      </div>
+      <div className='position'>
+        <h3>{position}</h3>
+      </div>
+      <div className='location-time'>
+        <h5>{location}</h5>
+        <span>{timePosted}</span>
+      </div>
+    </div>
+  );
+};
