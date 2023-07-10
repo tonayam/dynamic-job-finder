@@ -6,11 +6,12 @@ import { FaMoneyBill, FaGenderless } from 'react-icons/fa';
 import { GrUserExpert } from 'react-icons/gr';
 import { FcGraduationCap } from 'react-icons/fc';
 import { useGlobalContext } from '../../context/context';
+import { useNavigate } from 'react-router-dom';
 
 const JobDetails = () => {
   const { setShowJobDetails, showJobDetails } = useGlobalContext();
   const [saveJob, setSaveJob] = useState(false);
-
+  const navigate = useNavigate()
   return (
     <section className={`job-details ${showJobDetails && `show`}`}>
       <div className='close-btn'>
@@ -26,7 +27,7 @@ const JobDetails = () => {
             <h6>20d+</h6>
           </div>
           <div className='btns'>
-            <button className='blue apply'>Apply</button>
+            <button className='blue apply' onClick={()=> navigate(`job-application/asdaasad`)}>Apply</button>
             <button
               className='transparent save'
               onClick={() => setSaveJob(!saveJob)}

@@ -4,6 +4,16 @@ import Home from './Home/Home';
 import Profile from './Profile/Profile';
 import AccountSettings from './Account-Settings/AccountSettings';
 import MyJobs from './My-Jobs/MyJobs';
+import JobApplication from './Job-Application/JobApplication';
 import ContactUs from './Contact-Us/ContactUs';
 
-export { SignUp, SignIn, Home, Profile, AccountSettings, MyJobs, ContactUs };
+export {
+  SignUp,
+  SignIn,
+  Home,
+  Profile,
+  AccountSettings,
+  MyJobs,
+  JobApplication,
+  ContactUs,
+};

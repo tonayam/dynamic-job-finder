@@ -4,9 +4,17 @@ const AppContext = React.createContext();
 
 const AppProvider = ({ children }) => {
   const [showJobDetails, setShowJobDetails] = useState(false);
+  const [applicationStep, setApplicationStep] = useState(1);
 
   return (
-    <AppContext.Provider value={{ showJobDetails, setShowJobDetails }}>
+    <AppContext.Provider
+      value={{
+        showJobDetails,
+        setShowJobDetails,
+        applicationStep,
+        setApplicationStep,
+      }}
+    >
       {children}
     </AppContext.Provider>
   );

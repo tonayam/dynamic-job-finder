@@ -6,6 +6,7 @@ import {
   AccountSettings,
   ContactUs,
   Home,
+  JobApplication,
   MyJobs,
   Profile,
   SignIn,
@@ -28,6 +29,7 @@ function App() {
         <Route path='/sign-in' element={<SignIn />} />
         <Route path='/my-profile' element={<Profile />} />
         <Route path='/account-settings' element={<AccountSettings />} />
+        <Route path='/job-application/:id' element={<JobApplication />} />
         <Route path='/my-jobs' element={<MyJobs />} />
         <Route path='/contact-us' element={<ContactUs />} />
       </Routes>
