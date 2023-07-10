@@ -28,7 +28,7 @@ export const mobileNavLinksBatch2 = [
   },
   {
     name: `contact us`,
-    link: `/`,
+    link: `/contact-us`,
   },
 ];
 

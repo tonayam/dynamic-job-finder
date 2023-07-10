@@ -4,6 +4,7 @@ import { Route, Routes, useLocation } from 'react-router-dom';
 // PAGES WITHOUT AUTH
 import {
   AccountSettings,
+  ContactUs,
   Home,
   MyJobs,
   Profile,
@@ -28,6 +29,7 @@ function App() {
         <Route path='/my-profile' element={<Profile />} />
         <Route path='/account-settings' element={<AccountSettings />} />
         <Route path='/my-jobs' element={<MyJobs />} />
+        <Route path='/contact-us' element={<ContactUs />} />
       </Routes>
     </>
   );
