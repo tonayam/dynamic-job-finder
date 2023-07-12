@@ -9,7 +9,7 @@ export const mobileNavLinksBatch1 = [
   },
   {
     name: `employers`,
-    link: `/`,
+    link: `/create-job`,
   },
 ];
 

@@ -1,5 +1,4 @@
 import { useGlobalContext } from '../../context/context';
-import { BsBookmarkFill } from 'react-icons/bs';
 
 // JOB COMPONENT ON JOB LISTING PAGE (HOME PAGE)
 export const JobListingJob = ({ company, position, location, timePosted }) => {

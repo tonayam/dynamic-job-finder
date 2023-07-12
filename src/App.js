@@ -5,10 +5,12 @@ import { Route, Routes, useLocation } from 'react-router-dom';
 import {
   AccountSettings,
   ContactUs,
+  CreateJob,
   Home,
   JobApplication,
   MyJobs,
   Profile,
+  ReviewApplication,
   SignIn,
   SignUp,
 } from './pages';
@@ -30,6 +32,8 @@ function App() {
         <Route path='/my-profile' element={<Profile />} />
         <Route path='/account-settings' element={<AccountSettings />} />
         <Route path='/job-application/:id' element={<JobApplication />} />
+        <Route path='/job-application/review' element={<ReviewApplication />} />
+        <Route path='/create-job' element={<CreateJob />} />
         <Route path='/my-jobs' element={<MyJobs />} />
         <Route path='/contact-us' element={<ContactUs />} />
       </Routes>

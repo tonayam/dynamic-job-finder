@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import Navbar from '../../components/Navbar/Navbar';
-import { RiCloseFill } from 'react-icons/ri';
 import { useGlobalContext } from '../../context/context';
+import { useNavigate } from 'react-router-dom';
+import MobileJobInfo from '../../components/Job-Application-Job-Info/MobileJobInfo';
 
 const JobApplication = () => {
   const { applicationStep } = useGlobalContext();
@@ -28,88 +29,6 @@ const JobApplication = () => {
         <DesktopJobInfo />
       </main>
     </>
-  );
-};
-
-const MobileJobInfo = () => {
-  const [jobDetails, setJobDetails] = useState(false);
-
-  return (
-    <div className='mobile-job-info'>
-      <div className='job-company'>
-        <h3>Frontend Developer (React)</h3>
-        <p>Revent Technologies - Lagos</p>
-      </div>
-      <div className='see-more'>
-        <span
-          onClick={() => {
-            setJobDetails(true);
-          }}
-        >
-          See more details
-        </span>
-      </div>
-      <div className={`info ${jobDetails ? `show` : null}`}>
-        <div className='close-btn'>
-          <RiCloseFill
-            onClick={() => {
-              setJobDetails(false);
-            }}
-          />
-        </div>
-
-        {/* FULL JOB DESCRIPTION */}
-        <div className='full-description'>
-          <h2 className='title'>Job Description</h2>
-          <h4>About us</h4>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium
-            corrupti exercitationem quae omnis perspiciatis error debitis
-            dolorem incidunt. Corporis harum sunt repellat sed assumenda,
-            incidunt quia sapiente odit ea ut.
-          </p>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium
-            corrupti exercitationem quae omnis perspiciatis error debitis
-            dolorem incidunt. Corporis harum sunt repellat sed assumenda,
-            incidunt quia sapiente odit ea ut.
-          </p>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium
-            corrupti exercitationem quae omnis perspiciatis error debitis
-            dolorem incidunt. Corporis harum sunt repellat sed assumenda,
-            incidunt quia sapiente odit ea ut.
-          </p>
-
-          <h4>Duties And Responsibilities</h4>
-          <ul>
-            <li>Develop new user-facing features using React.js.</li>
-            <li>
-              Make your products easy to use, fast, stable and accessible.
-            </li>
-            <li>Use feedback from users to improve the product. </li>
-            <li>Build products to match design and specified requirements.</li>
-            <li>
-              Make your product work across multiple devices and operating
-              systems.
-            </li>
-          </ul>
-          <h4>Skills And Abilities</h4>
-          <ol>
-            <li>Develop new user-facing features using React.js.</li>
-            <li>
-              Make your products easy to use, fast, stable and accessible.
-            </li>
-            <li>Use feedback from users to improve the product. </li>
-            <li>Build products to match design and specified requirements.</li>
-            <li>
-              Make your product work across multiple devices and operating
-              systems.
-            </li>
-          </ol>
-        </div>
-      </div>
-    </div>
   );
 };
 
@@ -239,6 +158,8 @@ const ApplicationStep2 = () => {
 };
 
 const ApplicationStep3 = () => {
+  const navigate = useNavigate();
+
   const { setApplicationStep } = useGlobalContext();
 
   return (
@@ -246,7 +167,10 @@ const ApplicationStep3 = () => {
       <h2 className='title'>Questions from the employer</h2>
       <div className='questions'></div>
       <div className='btns'>
-        <button className='blue' onClick={() => setApplicationStep(4)}>
+        <button
+          className='blue'
+          onClick={() => navigate(`/job-application/review`)}
+        >
           Continue
         </button>
         <button className='transparent' onClick={() => setApplicationStep(2)}>
@@ -256,4 +180,5 @@ const ApplicationStep3 = () => {
     </section>
   );
 };
+
 export default JobApplication;

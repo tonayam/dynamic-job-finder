@@ -7,6 +7,7 @@
 @import "../components/Sidebar/sidebar";
 @import "../components/Jobs/jobs";
 @import "../components/Job-Details/job-details";
+@import "../components/Job-Application-Job-Info/mobile-job-info";
 
 // PAGES
 @import "../pages/Auth/auth";
@@ -15,6 +16,8 @@
 @import "../pages/Account-Settings/account-settings";
 @import "../pages/My-Jobs/my-jobs";
 @import "../pages/Job-Application/job-application";
+@import "../pages/Job-Application/review-application";
+@import "../pages/Create-Job/create-job";
 @import "../pages/Contact-Us/contact-us";
 
 
