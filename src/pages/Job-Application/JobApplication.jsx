@@ -207,7 +207,12 @@ const ApplicationStep3 = () => {
         <button className='transparent' onClick={() => navigate(`/`)}>
           Cancel
         </button>
-        <button className='blue'>Submit Application</button>
+        <button
+          className='blue'
+          onClick={() => navigate(`/job-application/application-sent`)}
+        >
+          Submit Application
+        </button>
       </div>
     </section>
   );

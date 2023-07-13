@@ -4,13 +4,13 @@ import { Route, Routes, useLocation } from 'react-router-dom';
 // PAGES WITHOUT AUTH
 import {
   AccountSettings,
+  ApplicationSent,
   ContactUs,
   CreateJob,
   Home,
   JobApplication,
   MyJobs,
   Profile,
-  ReviewApplication,
   SignIn,
   SignUp,
 } from './pages';
@@ -32,7 +32,10 @@ function App() {
         <Route path='/my-profile' element={<Profile />} />
         <Route path='/account-settings' element={<AccountSettings />} />
         <Route path='/job-application/:id' element={<JobApplication />} />
-        <Route path='/job-application/review' element={<ReviewApplication />} />
+        <Route
+          path='/job-application/application-sent'
+          element={<ApplicationSent />}
+        />
         <Route path='/create-job' element={<CreateJob />} />
         <Route path='/my-jobs' element={<MyJobs />} />
         <Route path='/contact-us' element={<ContactUs />} />

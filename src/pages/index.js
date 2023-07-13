@@ -5,7 +5,7 @@ import Profile from './Profile/Profile';
 import AccountSettings from './Account-Settings/AccountSettings';
 import MyJobs from './My-Jobs/MyJobs';
 import JobApplication from './Job-Application/JobApplication';
-import ReviewApplication from './Job-Application/ReviewApplication';
+import ApplicationSent from './Job-Application/ApplicationSent';
 import CreateJob from './Create-Job/CreateJob';
 import ContactUs from './Contact-Us/ContactUs';
 
@@ -17,7 +17,7 @@ export {
   AccountSettings,
   MyJobs,
   JobApplication,
-  ReviewApplication,
+  ApplicationSent,
   CreateJob,
   ContactUs,
 };
