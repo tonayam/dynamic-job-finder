@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import Navbar from '../../components/Navbar/Navbar';
 import { useGlobalContext } from '../../context/context';
 import MobileJobInfo from '../../components/Job-Application-Job-Info/MobileJobInfo';
+import { useNavigate } from 'react-router-dom';
 
 const JobApplication = () => {
   const { applicationStep } = useGlobalContext();
@@ -157,7 +158,7 @@ const ApplicationStep2 = () => {
 };
 
 const ApplicationStep3 = () => {
-  const { setApplicationStep } = useGlobalContext();
+  const navigate = useNavigate();
 
   return (
     <section className='application-step-three'>
@@ -203,10 +204,10 @@ const ApplicationStep3 = () => {
       </div>
 
       <div className='btns'>
-        <button className='blue'>Submit Application</button>
-        <button className='transparent' onClick={() => setApplicationStep(2)}>
-          Go back
+        <button className='transparent' onClick={() => navigate(`/`)}>
+          Cancel
         </button>
+        <button className='blue'>Submit Application</button>
       </div>
     </section>
   );

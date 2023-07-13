@@ -14,7 +14,7 @@ const Navbar = () => {
 
   return (
     <nav className='navbar' onMouseLeave={() => setShowProfileLinks(false)}>
-      <div className='logo'></div>
+      <Link to="/" className='logo'></Link>
 
       {/* DESKTOP NAV ITEMS */}
       <div className='desktop-search'>
