@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import Navbar from '../../components/Navbar/Navbar';
 import { useGlobalContext } from '../../context/context';
-import { useNavigate } from 'react-router-dom';
 import MobileJobInfo from '../../components/Job-Application-Job-Info/MobileJobInfo';
 
 const JobApplication = () => {
@@ -146,11 +145,11 @@ const ApplicationStep2 = () => {
         <p>Use a pdf, docx, doc, rtf and txt</p>
       </div>
       <div className='btns'>
-        <button className='blue' onClick={() => setApplicationStep(3)}>
-          Continue
-        </button>
         <button className='transparent' onClick={() => setApplicationStep(1)}>
           Go back
+        </button>
+        <button className='blue' onClick={() => setApplicationStep(3)}>
+          Continue
         </button>
       </div>
     </section>
@@ -158,21 +157,53 @@ const ApplicationStep2 = () => {
 };
 
 const ApplicationStep3 = () => {
-  const navigate = useNavigate();
-
   const { setApplicationStep } = useGlobalContext();
 
   return (
     <section className='application-step-three'>
-      <h2 className='title'>Questions from the employer</h2>
-      <div className='questions'></div>
+      <h2 className='title'>Additional Information for Employer</h2>
+
+      <div className='additional-info'>
+        <form action=''>
+          <div className='form-control'>
+            <label htmlFor='cover-letter'>
+              Cover letter <span>(optional)</span>
+            </label>
+            <textarea id='cover-letter'></textarea>
+          </div>
+          <div className='form-control'>
+            <label htmlFor='expected-salary'>
+              Expected Salary <span>(optional)</span>
+            </label>
+            <input type='text' id='expected-salary' />
+          </div>
+          <div className='form-control'>
+            <label htmlFor='expected-salary'>
+              Notice Period / Availability <span>(optional)</span>
+            </label>
+            <select name='notice-period' id='notice-period'>
+              <option defaultChecked hidden>
+                Select an option
+              </option>
+              <option value='available immediately'>
+                Available Immediately
+              </option>
+              <option value='1 week'>1 Week</option>
+              <option value='2 weeks'>2 Weeks</option>
+              <option value='1 month'>1 Month</option>
+            </select>
+          </div>
+          <div className='form-control'>
+            <label htmlFor='why-apply'>
+              Why you are applying for this role? <span>(optional)</span>
+            </label>
+            <input type='text' id='why-apply' />
+          </div>
+        </form>
+      </div>
+
       <div className='btns'>
-        <button
-          className='blue'
-          onClick={() => navigate(`/job-application/review`)}
-        >
-          Continue
-        </button>
+        <button className='blue'>Submit Application</button>
         <button className='transparent' onClick={() => setApplicationStep(2)}>
           Go back
         </button>

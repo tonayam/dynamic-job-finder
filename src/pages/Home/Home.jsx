@@ -3,6 +3,7 @@ import Navbar from '../../components/Navbar/Navbar';
 import { JobListingJob } from '../../components/Jobs/Jobs';
 import { miniJobs } from '../../data/data';
 import JobDetails from '../../components/Job-Details/JobDetails';
+import JobFilters from '../../components/Job-Filters/JobFilters';
 
 const Home = () => {
   return (
@@ -11,7 +12,7 @@ const Home = () => {
       <section className='available-jobs-container'>
         <div className='box'>
           {/* JOB FILTERS */}
-          <div className='filters'>Filter component here</div>
+          <JobFilters />
 
           {/* JOB LISTINGS AND INFORMATIONS */}
           <div className='jobs'>

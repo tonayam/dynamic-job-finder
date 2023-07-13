@@ -82,12 +82,31 @@
         // step three
         .application-step-three {
             width: 100%;
-            border: 2px solid red;
 
             h2.title {
-                font-size: clamp(1.2rem, 3vw, 1.5rem);
+                font-size: clamp(1.1rem, 3vw, 1.5rem);
                 font-weight: 500;
                 margin-bottom: 1.5rem;
+            }
+
+            .additional-info {
+                form {
+                    .form-control {
+                        margin-bottom: 1.5rem;
+
+                        label {
+                            span {
+                                color: inherit;
+                                font-size: 0.8rem;
+                                opacity: 0.5;
+                            }
+                        }
+
+                        select {
+                            color: inherit;
+                        }
+                    }
+                }
             }
 
             .btns {
@@ -105,11 +124,23 @@
     }
 }
 
-@include for-phone-only {}
+@include for-phone-only {
+    .job-application-page {
+        padding: 2rem 24px;
+    }
+}
 
-@include for-tablet-potrait-up {}
+@include for-tablet-potrait-up {
+    .job-application-page {
+        padding: 2rem 40px;
+    }
+}
 
-@include for-tablet-landscape-up {}
+@include for-tablet-landscape-up {
+    .job-application-page {
+        padding: 2rem 60px;
+    }
+}
 
 @include for-desktop-up {
     .job-application-page {
