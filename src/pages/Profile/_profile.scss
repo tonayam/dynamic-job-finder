@@ -137,16 +137,14 @@
                 color: #1861bf;
                 margin-bottom: 1rem;
 
-                .add {
-                    border: 2px solid #1861bf;
-                    padding: 0 0.3rem;
-                    border-radius: 50%;
+                svg {
                     margin-right: 0.5rem;
+                    color: #1861bf;
+                    font-size: 1.2rem;
                 }
             }
         }
     }
-
 }
 
 @include for-phone-only {

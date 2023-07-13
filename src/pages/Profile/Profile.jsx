@@ -3,6 +3,7 @@ import Navbar from '../../components/Navbar/Navbar';
 import Sidebar from '../../components/Sidebar/Sidebar';
 import { BiUser } from 'react-icons/bi';
 import { RiEditCircleFill, RiEditLine } from 'react-icons/ri';
+import { RxPlusCircled } from 'react-icons/rx';
 
 const Profile = () => {
   return (
@@ -100,11 +101,11 @@ const Profile = () => {
               <span>I am open to remote work</span>
             </div>
             <div className='desired-job-title'>
-              <div className='add'>+</div>
+              <RxPlusCircled />
               <span>Add desired job title</span>
             </div>
             <div className='desired-location'>
-              <div className='add'>+</div>
+              <RxPlusCircled />
               <span>Add desired job location</span>
             </div>
           </div>
