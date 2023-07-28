@@ -225,3 +225,15 @@ input:-webkit-autofill:active {
 .border {
     border: 2px solid red;
 }
+
+// LOADER
+.loader {
+    @include flex(center, center, row);
+    height: 100%;
+    width: 100%;
+
+    img {
+        width: 32px;
+        height: 32px;
+    }
+}

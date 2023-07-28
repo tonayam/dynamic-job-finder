@@ -1,8 +1,10 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Navbar from '../../components/Navbar/Navbar';
 import { useGlobalContext } from '../../context/context';
 import MobileJobInfo from '../../components/Job-Application-Job-Info/MobileJobInfo';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import loader from '../../assets/purple-loader.svg';
 
 const JobApplication = () => {
   const { applicationStep } = useGlobalContext();
@@ -33,63 +35,45 @@ const JobApplication = () => {
 };
 
 const DesktopJobInfo = () => {
+  const { activeJob, baseURL } = useGlobalContext();
+  const [jobDetails, setJobDetails] = useState({});
+  const [loading, setLoading] = useState(true);
+
+  const fetchJob = async () => {
+    try {
+      setLoading(true);
+      const { data } = await axios.get(`${baseURL}/jobs/${activeJob}`);
+      setJobDetails(data.job);
+      setLoading(false);
+    } catch (error) {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchJob();
+    // eslint-disable-next-line
+  }, [activeJob]);
   return (
     <div className='desktop-job-info'>
       <div className='container'>
-        <div className='job-company'>
-          <h3>Frontend Developer (React)</h3>
-          <p>Revent Technologies - Lagos</p>
-        </div>
-        {/* FULL JOB DESCRIPTION */}
-        <div className='full-description'>
-          <h2 className='title'>Job Description</h2>
-          <h4>About us</h4>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium
-            corrupti exercitationem quae omnis perspiciatis error debitis
-            dolorem incidunt. Corporis harum sunt repellat sed assumenda,
-            incidunt quia sapiente odit ea ut.
-          </p>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium
-            corrupti exercitationem quae omnis perspiciatis error debitis
-            dolorem incidunt. Corporis harum sunt repellat sed assumenda,
-            incidunt quia sapiente odit ea ut.
-          </p>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium
-            corrupti exercitationem quae omnis perspiciatis error debitis
-            dolorem incidunt. Corporis harum sunt repellat sed assumenda,
-            incidunt quia sapiente odit ea ut.
-          </p>
-
-          <h4>Duties And Responsibilities</h4>
-          <ul>
-            <li>Develop new user-facing features using React.js.</li>
-            <li>
-              Make your products easy to use, fast, stable and accessible.
-            </li>
-            <li>Use feedback from users to improve the product. </li>
-            <li>Build products to match design and specified requirements.</li>
-            <li>
-              Make your product work across multiple devices and operating
-              systems.
-            </li>
-          </ul>
-          <h4>Skills And Abilities</h4>
-          <ol>
-            <li>Develop new user-facing features using React.js.</li>
-            <li>
-              Make your products easy to use, fast, stable and accessible.
-            </li>
-            <li>Use feedback from users to improve the product. </li>
-            <li>Build products to match design and specified requirements.</li>
-            <li>
-              Make your product work across multiple devices and operating
-              systems.
-            </li>
-          </ol>
-        </div>
+        {loading ? (
+          <div className='loader'>
+            <img src={loader} alt='' />
+          </div>
+        ) : (
+          <>
+            <div className='job-company'>
+              <h3>{jobDetails.jobTitle}</h3>
+              <p>{jobDetails.companyName}</p>
+            </div>
+            {/* FULL JOB DESCRIPTION */}
+            <div className='full-description'>
+              <h2 className='title'>Job Description</h2>
+              <div dangerouslySetInnerHTML={{ __html: jobDetails.desc }}></div>
+            </div>
+          </>
+        )}
       </div>
     </div>
   );

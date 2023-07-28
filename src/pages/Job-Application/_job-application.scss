@@ -2,6 +2,10 @@
     @include flex(flex-start, flex-start, column-reverse);
     padding: 2rem 14px;
 
+    .loader {
+        height: 100vh;
+    }
+
     .application-steps {
         margin-top: 1.5rem;
         margin-bottom: 2.5rem;

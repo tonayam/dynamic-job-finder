@@ -15,17 +15,6 @@
         transform: translateX(0);
     }
 
-    // LOADER
-    .loader {
-        @include flex(center, center, row);
-        height: 100%;
-
-        img {
-            width: 32px;
-            height: 32px;
-        }
-    }
-
     .close-btn {
         @include flex(center, flex-end, row);
         margin-bottom: 2rem;

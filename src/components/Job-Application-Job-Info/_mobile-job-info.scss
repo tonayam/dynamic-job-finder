@@ -1,4 +1,9 @@
     .mobile-job-info {
+        .loader {
+            height: 100% !important;
+        }
+
+
         .job-company {
             margin-bottom: 0.2rem;
 
@@ -92,11 +97,29 @@
         }
     }
 
-    @include for-phone-only {}
+    @include for-phone-only {
+        .mobile-job-info {
+            .info {
+                padding: 2rem 24px;
+            }
+        }
+    }
 
-    @include for-tablet-potrait-up {}
+    @include for-tablet-potrait-up {
+        .mobile-job-info {
+            .info {
+                padding: 2rem 40px;
+            }
+        }
+    }
 
-    @include for-tablet-landscape-up {}
+    @include for-tablet-landscape-up {
+        .mobile-job-info {
+            .info {
+                padding: 2rem 60px;
+            }
+        }
+    }
 
     @include for-desktop-up {}
 
