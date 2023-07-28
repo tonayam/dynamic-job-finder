@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { RiCloseFill } from 'react-icons/ri';
 import { BsHourglassSplit, BsBookmark, BsBookmarkFill } from 'react-icons/bs';
 import { SlCalender } from 'react-icons/sl';
@@ -7,11 +7,57 @@ import { GrUserExpert } from 'react-icons/gr';
 import { FcGraduationCap } from 'react-icons/fc';
 import { useGlobalContext } from '../../context/context';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import loader from '../../assets/purple-loader.svg';
 
 const JobDetails = () => {
-  const { setShowJobDetails, showJobDetails } = useGlobalContext();
+  const { setShowJobDetails, showJobDetails, activeJob, baseURL } =
+    useGlobalContext();
   const [saveJob, setSaveJob] = useState(false);
   const navigate = useNavigate();
+  const [jobDetails, setJobDetails] = useState({});
+  const [loading, setLoading] = useState(true);
+
+  const fetchJob = async () => {
+    try {
+      setLoading(true);
+      const { data } = await axios.get(`${baseURL}/jobs/${activeJob}`);
+      setJobDetails(data.job);
+      setLoading(false);
+    } catch (error) {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchJob();
+    // eslint-disable-next-line
+  }, [activeJob]);
+
+  if (loading) {
+    return (
+      <section className={`job-details ${showJobDetails && `show`}`}>
+        <div className='loader'>
+          <img src={loader} alt='' />
+        </div>
+      </section>
+    );
+  }
+
+  const {
+    companyName,
+    jobTitle,
+    desc,
+    offeredSalary,
+    gender,
+    experience,
+    qualification,
+    jobExpiration,
+    location,
+    createdAt,
+    _id,
+  } = jobDetails;
+
   return (
     <section className={`job-details ${showJobDetails && `show`}`}>
       <div className='close-btn'>
@@ -20,16 +66,16 @@ const JobDetails = () => {
       {/* BASIC INFORMATION ABOUT THE JOB POSTING */}
       <div className='job-info'>
         <div className='company-position'>
-          <h4>Astrosoft</h4>
-          <h1>Frontdesk Assistant</h1>
+          <h4>{companyName}</h4>
+          <h1>{jobTitle}</h1>
           <div className='location-date'>
-            <h6>Yenegoa, bayelsa</h6>
-            <h6>20d+</h6>
+            <h6>{location}</h6>
+            <h6>{new Date(createdAt).toDateString()}</h6>
           </div>
           <div className='btns'>
             <button
               className='blue apply'
-              onClick={() => navigate(`/job-application/asdaasad`)}
+              onClick={() => navigate(`/job-application/${_id}`)}
             >
               Apply
             </button>
@@ -43,38 +89,14 @@ const JobDetails = () => {
           </div>
         </div>
       </div>
-
       {/* JOB POSTING DESCRIPTION */}
       <div className='job-description'>
         <h3 className='title'>Job description</h3>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. At
-          repudiandae optio consequatur aspernatur tempore totam ratione! Ea
-          maxime voluptatum tempora magni nisi id nostrum sit exercitationem
-          illo non ullam quia unde totam doloremque reiciendis, soluta repellat
-          dolores, sunt consequatur aperiam.
-        </p>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. At
-          repudiandae optio consequatur aspernatur tempore totam ratione! Ea
-          maxime voluptatum tempora magni nisi id nostrum sit exercitationem
-          illo non ullam quia unde totam doloremque reiciendis, soluta repellat
-          dolores, sunt consequatur aperiam.
-        </p>
-
-        <h4>Job Requirements</h4>
-        <ul>
-          <li>item one</li>
-          <li>item one</li>
-          <li>item one</li>
-          <li>item one</li>
-        </ul>
+        <div dangerouslySetInnerHTML={{ __html: desc }}></div>
       </div>
-
       {/* JOB OVERVIEW SECTION */}
       <div className='job-overview'>
         <h3 className='title'>Job Overview</h3>
-
         <div className='items-container'>
           <div className='item data-posted'>
             <div className='logo'>
@@ -82,7 +104,7 @@ const JobDetails = () => {
             </div>
             <div className='info'>
               <h6>Date Posted</h6>
-              <p>May 14, 2023</p>
+              <p>{new Date(createdAt).toDateString()}</p>
             </div>
           </div>
           <div className='item offered salary'>
@@ -91,7 +113,7 @@ const JobDetails = () => {
             </div>
             <div className='info'>
               <h6>Offered Salary</h6>
-              <p>$100 - $200 / week</p>
+              <p>₦{offeredSalary?.toLocaleString(`en-US`)}</p>
             </div>
           </div>
           <div className='item expiration date'>
@@ -100,7 +122,7 @@ const JobDetails = () => {
             </div>
             <div className='info'>
               <h6>Expiration date</h6>
-              <p>June 13, 2023</p>
+              <p>{new Date(jobExpiration).toDateString()}</p>
             </div>
           </div>
           <div className='item expereience'>
@@ -109,7 +131,7 @@ const JobDetails = () => {
             </div>
             <div className='info'>
               <h6>Experience</h6>
-              <p>No Experience Needed</p>
+              <p>{experience}</p>
             </div>
           </div>
           <div className='item gender'>
@@ -118,7 +140,7 @@ const JobDetails = () => {
             </div>
             <div className='info'>
               <h6>Gender</h6>
-              <p>Both</p>
+              <p>{gender}</p>
             </div>
           </div>
           <div className='item qualification'>
@@ -127,7 +149,7 @@ const JobDetails = () => {
             </div>
             <div className='info'>
               <h6>Qualification</h6>
-              <p>Certificate</p>
+              <p>{qualification}</p>
             </div>
           </div>
         </div>

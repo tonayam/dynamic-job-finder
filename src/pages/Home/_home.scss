@@ -28,6 +28,16 @@
                     padding: 1rem 14px;
                     overflow-y: scroll;
                     height: 100%;
+
+                    .loader {
+                        @include flex(center, center, row);
+                        height: 100%;
+
+                        img {
+                            width: 32px;
+                            height: 32px;
+                        }
+                    }
                 }
             }
         }

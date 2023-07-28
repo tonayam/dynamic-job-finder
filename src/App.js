@@ -14,6 +14,8 @@ import {
   SignIn,
   SignUp,
 } from './pages';
+import { Slide, ToastContainer } from 'react-toastify';
+import EmployerRoutes from './pages/EmployerRoutes';
 
 function App() {
   const { pathname } = useLocation();
@@ -36,10 +38,14 @@ function App() {
           path='/job-application/application-sent'
           element={<ApplicationSent />}
         />
-        <Route path='/create-job' element={<CreateJob />} />
         <Route path='/my-jobs' element={<MyJobs />} />
         <Route path='/contact-us' element={<ContactUs />} />
+
+        <Route element={<EmployerRoutes />}>
+          <Route path='/create-job' element={<CreateJob />} />
+        </Route>
       </Routes>
+      <ToastContainer transition={Slide} />
     </>
   );
 }

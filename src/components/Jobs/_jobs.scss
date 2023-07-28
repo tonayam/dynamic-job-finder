@@ -6,6 +6,10 @@
     border-radius: 10px;
     margin-bottom: 1.5rem;
 
+    &.active-job {
+        border: 2px solid $primaryColor;
+    }
+
     &:hover {
         border-color: $primaryColor;
     }

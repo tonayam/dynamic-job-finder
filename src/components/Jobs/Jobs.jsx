@@ -1,11 +1,28 @@
 import { useGlobalContext } from '../../context/context';
 
 // JOB COMPONENT ON JOB LISTING PAGE (HOME PAGE)
-export const JobListingJob = ({ company, position, location, timePosted }) => {
-  const { setShowJobDetails } = useGlobalContext();
+export const JobListingJob = ({
+  company,
+  position,
+  location,
+  timePosted,
+  activeJob,
+  id,
+}) => {
+  const {
+    setShowJobDetails,
+    activeJob: currentJob,
+    setActiveJob,
+  } = useGlobalContext();
 
   return (
-    <div className='job-listing-job' onClick={() => setShowJobDetails(true)}>
+    <div
+      className={`job-listing-job ${id === currentJob ? `active-job` : ``}`}
+      onClick={() => {
+        setActiveJob(id);
+        setShowJobDetails(true);
+      }}
+    >
       <div className='company'>
         <h2>{company}</h2>
       </div>

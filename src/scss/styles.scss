@@ -221,3 +221,7 @@ input:-webkit-autofill:active {
 .container {
     @include flex(center, space-between, row);
 }
+
+.border {
+    border: 2px solid red;
+}

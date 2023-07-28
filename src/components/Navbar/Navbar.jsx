@@ -6,15 +6,16 @@ import {
   RiUserLine,
 } from 'react-icons/ri';
 import { mobileNavLinksBatch1, mobileNavLinksBatch2 } from '../../data/data';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Navbar = () => {
   const [showNav, setShowNav] = useState(false);
   const [showProfileLinks, setShowProfileLinks] = useState(false);
+  const navigate = useNavigate();
 
   return (
     <nav className='navbar' onMouseLeave={() => setShowProfileLinks(false)}>
-      <Link to="/" className='logo'></Link>
+      <Link to='/' className='logo'></Link>
 
       {/* DESKTOP NAV ITEMS */}
       <div className='desktop-search'>
@@ -85,7 +86,15 @@ const Navbar = () => {
             );
           })}
         </ul>
-        <p>Sign Out</p>
+        <p
+          onClick={() => {
+            navigate(`/`);
+            sessionStorage.removeItem(`userInfo`);
+            console.log(`clicked`);
+          }}
+        >
+          Sign Out
+        </p>
       </div>
     </nav>
   );

@@ -1,11 +1,14 @@
 import React from 'react';
 import Navbar from '../../components/Navbar/Navbar';
 import { JobListingJob } from '../../components/Jobs/Jobs';
-import { miniJobs } from '../../data/data';
 import JobDetails from '../../components/Job-Details/JobDetails';
 import JobFilters from '../../components/Job-Filters/JobFilters';
+import { useGlobalContext } from '../../context/context';
+import loader from '../../assets/purple-loader.svg';
 
 const Home = () => {
+  const { allJobs } = useGlobalContext();
+
   return (
     <main className='home-page'>
       <Navbar />
@@ -17,18 +20,34 @@ const Home = () => {
           {/* JOB LISTINGS AND INFORMATIONS */}
           <div className='jobs'>
             <div className='jobs-list'>
-              {miniJobs.map((job, jobIndex) => {
-                const { company, location, position, timePosted } = job;
-                return (
-                  <JobListingJob
-                    key={jobIndex}
-                    company={company}
-                    location={location}
-                    position={position}
-                    timePosted={timePosted}
-                  />
-                );
-              })}
+              {allJobs.length > 0 ? (
+                <>
+                  {allJobs.map((job) => {
+                    const {
+                      companyName,
+                      location,
+                      jobTitle,
+                      createdAt,
+                      _id: jobId,
+                    } = job;
+                    const datePosted = new Date(createdAt).toLocaleDateString();
+                    return (
+                      <JobListingJob
+                        key={jobId}
+                        company={companyName}
+                        location={location}
+                        position={jobTitle}
+                        timePosted={datePosted}
+                        id={jobId}
+                      />
+                    );
+                  })}
+                </>
+              ) : (
+                <div className='loader'>
+                  <img src={loader} alt='' />
+                </div>
+              )}
             </div>
 
             {/* JOB DETAILS */}
