@@ -87,7 +87,7 @@
 
         .title {
             margin-bottom: 1rem;
-            font-weight: 500;
+            font-weight: 600;
             text-transform: capitalize;
             font-size: clamp(1.3rem, 4vw, 1.5rem);
         }
@@ -96,6 +96,8 @@
             line-height: 26px;
             margin-bottom: 1rem;
             color: rgb(80, 88, 99);
+            font-size: clamp(0.9rem, 3vw, 1rem);
+            padding-left: 0.5rem;
         }
 
         h1,
@@ -106,6 +108,7 @@
         h6 {
             margin-bottom: 0.5rem;
             font-weight: 500;
+
         }
 
         ul,
@@ -117,6 +120,7 @@
                 font-size: clamp(0.9rem, 2vw, 1rem);
                 color: rgb(80, 88, 99);
                 font-weight: 400;
+                margin-bottom: 0.8rem;
             }
         }
     }
