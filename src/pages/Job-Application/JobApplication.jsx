@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+import { toast } from 'react-toastify';
 
 const JobApplication = () => {
   const { applicationStep } = useGlobalContext();
@@ -282,31 +283,22 @@ const ApplicationStep2 = () => {
 
 const ApplicationStep3 = () => {
   const navigate = useNavigate();
-  const { setJobApplicationInfo, jobApplicationInfo, baseURL } =
-    useGlobalContext();
+  const { jobApplicationInfo, baseURL } = useGlobalContext();
   const [loading, setLoading] = useState(false);
   const { token } = JSON.parse(sessionStorage.getItem(`userInfo`));
-
-  const formik = useFormik({
-    initialValues: {
-      coverLetter: ``,
-      expectedSalary: ``,
-      noticePeriod: ``,
-      applicationReason: ``,
-    },
-    onSubmit() {
-      const { coverLetter, applicationReason, expectedSalary, noticePeriod } =
-        formik.values;
-      setJobApplicationInfo({
-        ...jobApplicationInfo,
-        coverLetter,
-        expectedSalary,
-        noticePeriod,
-        applicationReason,
-      });
-      submitApplication();
-    },
+  const [optionalInfo, setOptionalInfo] = useState({
+    coverLetter: ``,
+    expectedSalary: ``,
+    noticePeriod: ``,
+    applicationReason: ``,
   });
+
+  const handleChange = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+
+    setOptionalInfo({ ...optionalInfo, [name]: value });
+  };
 
   const submitApplication = async () => {
     try {
@@ -318,31 +310,31 @@ const ApplicationStep3 = () => {
       formData.append(`email`, jobApplicationInfo.email);
       formData.append(`city`, jobApplicationInfo.city);
       formData.append(`phone`, jobApplicationInfo.phone);
-      formData.append(`coverLetter`, jobApplicationInfo.coverLetter);
-      formData.append(`expectedSalary`, jobApplicationInfo.expectedSalary);
-      formData.append(`noticePeriod`, jobApplicationInfo.noticePeriod);
-      formData.append(
-        `applicationReason`,
-        jobApplicationInfo.applicationReason
-      );
+      formData.append(`coverLetter`, optionalInfo.coverLetter);
+      formData.append(`expectedSalary`, optionalInfo.expectedSalary);
+      formData.append(`noticePeriod`, optionalInfo.noticePeriod);
+      formData.append(`applicationReason`, optionalInfo.applicationReason);
       formData.append(`resume`, jobApplicationInfo.resume);
       setLoading(true);
-      const response = await axios.post(
-        `${baseURL}/job-applications`,
-        formData,
-        {
-          headers: {
-            'Content-Type': 'multipart/form-data',
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      await axios.post(`${baseURL}/job-applications`, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          Authorization: `Bearer ${token}`,
+        },
+      });
       setLoading(false);
-      console.log(response);
+      toast.success(`Application sent`);
+      navigate(`/job-application/application-sent`);
     } catch (error) {
       setLoading(false);
       console.log(error);
+      toast.error(error.response.data.msg);
     }
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    submitApplication();
   };
 
   return (
@@ -350,7 +342,7 @@ const ApplicationStep3 = () => {
       <h2 className='title'>Additional Information for Employer</h2>
 
       <div className='additional-info'>
-        <form action='' onSubmit={formik.handleSubmit}>
+        <form action='' onSubmit={handleSubmit}>
           {/* COVER LETTER */}
           <div className='form-control'>
             <label htmlFor='cover-letter'>
@@ -359,9 +351,8 @@ const ApplicationStep3 = () => {
             <textarea
               id='cover-letter'
               name='coverLetter'
-              value={formik.values.coverLetter}
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
+              value={optionalInfo.coverLetter}
+              onChange={handleChange}
             ></textarea>
           </div>
 
@@ -374,9 +365,8 @@ const ApplicationStep3 = () => {
               type='text'
               id='expected-salary'
               name='expectedSalary'
-              value={formik.values.expectedSalary}
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
+              value={optionalInfo.expectedSalary}
+              onChange={handleChange}
             />
           </div>
 
@@ -388,9 +378,8 @@ const ApplicationStep3 = () => {
             <select
               name='noticePeriod'
               id='notice-period'
-              value={formik.values.noticePeriod}
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
+              value={optionalInfo.noticePeriod}
+              onChange={handleChange}
             >
               <option defaultChecked hidden>
                 Select an option
@@ -413,9 +402,8 @@ const ApplicationStep3 = () => {
               type='text'
               id='why-apply'
               name='applicationReason'
-              value={formik.values.applicationReason}
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
+              value={optionalInfo.applicationReason}
+              onChange={handleChange}
             />
           </div>
           <div className='btns'>
