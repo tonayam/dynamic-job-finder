@@ -5,6 +5,7 @@ import './scss/styles.scss';
 import { BrowserRouter } from 'react-router-dom';
 import { AppProvider } from './context/context';
 import 'react-toastify/dist/ReactToastify.css';
+import 'react-loading-skeleton/dist/skeleton.css';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

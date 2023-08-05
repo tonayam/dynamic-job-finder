@@ -64,16 +64,6 @@
             font-size: clamp(0.9rem, 4vw, 1rem);
             font-weight: 400;
         }
-
-        select {
-            border-radius: 5px;
-            height: 40px;
-            background-color: #fff;
-            color: #000;
-            border: 1px solid $borderColor;
-            width: 35%;
-            outline: none;
-        }
     }
 
     .position {

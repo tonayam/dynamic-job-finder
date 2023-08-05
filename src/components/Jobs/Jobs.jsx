@@ -45,13 +45,6 @@ export const AppliedJob = ({ company, position, location, timePosted }) => {
     <div className='applied-job' onClick={() => setShowJobDetails(true)}>
       <div className='company-status'>
         <h2>{company}</h2>
-        <select name='status' id='status'>
-          <option value='applied'>Applied</option>
-          <option value='applied'>Heard Back</option>
-          <option value='applied'>Interviewing</option>
-          <option value='applied'>Got Offer</option>
-          <option value='applied'>Landed Job</option>
-        </select>
       </div>
       <div className='position'>
         <h3>{position}</h3>
