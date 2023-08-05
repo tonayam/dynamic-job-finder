@@ -11,6 +11,13 @@ import { toast } from 'react-toastify';
 export const SignUp = () => {
   const [formType, setFormType] = useState(`job-seeker`);
 
+  // const signUpUser = () => {
+  //   try {
+  //   } catch (error) {
+  //     console.log(error.response.data.msg);
+  //   }
+  // };
+
   return (
     <main className='sign-up-page'>
       <div className='greeting'>

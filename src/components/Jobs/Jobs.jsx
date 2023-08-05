@@ -38,11 +38,18 @@ export const JobListingJob = ({
 };
 
 // JOB COMPONENT FOR APPLIED JOBS
-export const AppliedJob = ({ company, position, location, timePosted }) => {
-  const { setShowJobDetails } = useGlobalContext();
+export const AppliedJob = ({ company, position, location, timePosted, id }) => {
+  const { setShowJobDetails, setActiveAppliedJob, activeAppliedJob } =
+    useGlobalContext();
 
   return (
-    <div className='applied-job' onClick={() => setShowJobDetails(true)}>
+    <div
+      className={`applied-job ${id === activeAppliedJob ? `active-job` : ``}`}
+      onClick={() => {
+        setActiveAppliedJob(id);
+        setShowJobDetails(true);
+      }}
+    >
       <div className='company-status'>
         <h2>{company}</h2>
       </div>

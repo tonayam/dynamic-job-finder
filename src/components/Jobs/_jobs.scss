@@ -56,6 +56,10 @@
         border-color: $primaryColor;
     }
 
+    &.active-job {
+        border: 2px solid $primaryColor;
+    }
+
     .company-status {
         margin-bottom: 0.7rem;
         @include flex(center, space-between, row);

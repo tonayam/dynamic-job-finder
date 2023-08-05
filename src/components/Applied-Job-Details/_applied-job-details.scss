@@ -1,0 +1,243 @@
+.applied-job-details {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #fff;
+    height: 100vh;
+    transform: translateX(100%);
+    transition: 0.3s linear all;
+    padding: 1.5rem 14px;
+    z-index: 20;
+    overflow-y: scroll;
+
+    &.show {
+        transform: translateX(0);
+    }
+
+    .close-btn {
+        @include flex(center, flex-end, row);
+        margin-bottom: 2rem;
+
+        svg {
+            font-size: 1.5rem;
+        }
+    }
+
+
+    // BASIC INFORMATION ABOUT THE JOB POSTING
+    .job-info {
+        padding: 0.5rem 0;
+
+        .company-position {
+            h4 {
+                font-weight: 400;
+                margin-bottom: 1rem;
+            }
+
+            h1 {
+                font-size: clamp(1.2rem, 4vw, 1.8rem);
+                font-weight: 500;
+            }
+
+            .location-date {
+                @include flex(center, space-between, row);
+                margin-bottom: 1rem;
+
+                h6 {
+                    font-size: clamp(0.8rem, 2vw, 1rem);
+                    font-weight: 300;
+                }
+            }
+
+            .update-job-status {
+                padding: 1rem 0;
+
+                h3.title {
+                    font-size: clamp(1rem, 3vw, 1.2rem);
+                    font-weight: 500;
+                    margin-bottom: 1rem;
+                }
+
+                .boxes {
+                    @include grid(2, 1fr, 10px);
+
+                    .form-control {
+                        @include flex(center, flex-start, row);
+
+                        label {
+                            margin-bottom: 0;
+                            font-size: clamp(0.7rem, 2vw, 0.9rem);
+                        }
+
+                        input {
+                            width: 16px;
+                            height: 16px;
+                            margin-right: 0.5rem;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    // JOB POSTING DESCRIPTION
+    .job-description {
+        margin: 2rem 0;
+
+        .title {
+            margin-bottom: 1rem;
+            font-weight: 600;
+            text-transform: capitalize;
+            font-size: clamp(1.3rem, 4vw, 1.5rem);
+        }
+
+        p {
+            line-height: 26px;
+            margin-bottom: 1rem;
+            color: rgb(80, 88, 99);
+            font-size: clamp(0.9rem, 3vw, 1rem);
+            padding-left: 0.5rem;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+
+        }
+
+        ul,
+        ol {
+            list-style: disc;
+            padding-left: 32px;
+
+            li {
+                font-size: clamp(0.9rem, 2vw, 1rem);
+                color: rgb(80, 88, 99);
+                font-weight: 400;
+                margin-bottom: 0.8rem;
+            }
+        }
+    }
+
+    // JOB OVERVIEW SECTION
+    .job-overview {
+        border-radius: 5px;
+        margin-bottom: 100px;
+        background-color: #F5F7FC;
+        padding: 1rem;
+
+        .title {
+            font-size: clamp(1.4rem, 3vw, 1.5rem);
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+
+        .item {
+            margin-bottom: 1.5rem;
+            @include flex(flex-start, flex-start, row);
+
+            .logo {
+                @include flex(center, center, row);
+                margin-right: 1.5rem;
+
+                svg {
+                    font-size: 1.5rem
+                }
+            }
+
+            .info {
+                @include flex(flex-start, flex-start, column);
+
+                h6 {
+                    font-size: clamp(1rem, 3vw, 1.3rem);
+                    margin-bottom: 0.1rem;
+                    text-transform: capitalize;
+                    font-weight: 400;
+                }
+
+                p {
+                    font-size: clamp(0.9rem, 2vw, 1rem);
+                    color: rgb(80, 88, 99);
+                }
+            }
+        }
+    }
+}
+
+@include for-phone-only {
+    .applied-job-details {
+        padding: 1.5rem 24px;
+
+        // JOB OVERVIEW SECTION
+        .job-overview {
+            .item {
+                .logo {
+                    svg {
+                        font-size: 2rem
+                    }
+                }
+            }
+        }
+    }
+}
+
+@include for-tablet-potrait-up {
+    .applied-job-details {
+        padding: 1.5rem 40px;
+    }
+}
+
+@include for-tablet-landscape-up {
+    .applied-job-details {
+        padding: 1.5rem 60px;
+    }
+}
+
+@include for-desktop-up {
+    .applied-job-details {
+        position: static;
+        width: 60%;
+        height: 100%;
+        transform: translateX(0);
+        padding: 1.5rem 14px;
+
+
+        .close-btn {
+            display: none;
+        }
+
+        .job-info {
+            padding: 0.5rem 0;
+
+            .company-position {
+
+                .update-job-status {
+                    padding: 1rem 0;
+
+                    .boxes {
+                        @include grid(3, 1fr, 10px);
+                    }
+                }
+            }
+        }
+
+        // JOB OVERVIEW SECTION
+        .job-overview {
+            .title {
+                margin-bottom: 1.5rem;
+            }
+
+            .items-container {
+                @include grid(2, 1fr, 20px);
+            }
+        }
+    }
+}
+
+@include for-big-desktop-up {}

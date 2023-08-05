@@ -2,17 +2,17 @@ import React, { useState } from 'react';
 import { AppliedJob, SavedJob } from '../../components/Jobs/Jobs';
 import { miniJobs } from '../../data/data';
 import Navbar from '../../components/Navbar/Navbar';
-import JobDetails from '../../components/Job-Details/JobDetails';
 import axios from 'axios';
 import { useGlobalContext } from '../../context/context';
 import { useEffect } from 'react';
 import { AppliedJobSkeleton } from '../../components/Skeleton-Loaders/SkeletonLoaders';
+import AppliedJobDetails from '../../components/Applied-Job-Details/AppliedJobDetails';
 
 const MyJobs = () => {
   const [currentTab, setCurrentTab] = useState(`saved`);
   const [appliedJobs, setAppliedJobs] = useState([]);
   const [appliedJobsLoading, setAppliedJobsLoading] = useState(true);
-  const { baseURL } = useGlobalContext();
+  const { baseURL, setActiveAppliedJob, activeAppliedJob } = useGlobalContext();
   const { token } = JSON.parse(sessionStorage.getItem(`userInfo`))
     ? JSON.parse(sessionStorage.getItem(`userInfo`))
     : ``;
@@ -24,6 +24,7 @@ const MyJobs = () => {
         headers: { Authorization: `Bearer ${token}` },
       });
       setAppliedJobs(data.appliedJobs);
+      setActiveAppliedJob(data.appliedJobs[0].job._id);
       setAppliedJobsLoading(false);
     } catch (error) {
       setAppliedJobsLoading(false);
@@ -77,9 +78,11 @@ const MyJobs = () => {
           ) : (
             appliedJobs.map((job) => {
               const { job: jobDetails, _id } = job;
+
               return (
                 <AppliedJob
                   key={_id}
+                  id={jobDetails._id}
                   company={jobDetails.companyName}
                   location={jobDetails.location}
                   position={jobDetails.jobTitle}
@@ -92,7 +95,7 @@ const MyJobs = () => {
           )}
         </div>
         {/* JOB DETAILS */}
-        <JobDetails />
+        <AppliedJobDetails />
       </div>
     </main>
   );

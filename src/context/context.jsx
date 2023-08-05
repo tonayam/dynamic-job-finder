@@ -10,6 +10,8 @@ const AppProvider = ({ children }) => {
   const [lastRoute, setLastRoute] = useState(``);
   const [allJobs, setAllJobs] = useState([]);
   const [activeJob, setActiveJob] = useState({});
+  const [activeAppliedJob, setActiveAppliedJob] = useState({});
+
   const [jobApplicationInfo, setJobApplicationInfo] = useState({
     job: ``,
     employer: ``,
@@ -52,6 +54,8 @@ const AppProvider = ({ children }) => {
         fetchAllJobs,
         activeJob,
         setActiveJob,
+        activeAppliedJob,
+        setActiveAppliedJob,
         jobApplicationInfo,
         setJobApplicationInfo,
       }}
