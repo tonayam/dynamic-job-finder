@@ -23,7 +23,6 @@ const AppliedJobDetails = ({ activeJobId }) => {
       setLoading(true);
       const { data } = await axios.get(`${baseURL}/jobs/${activeAppliedJob}`);
       setJobDetails(data.job);
-      console.log(data);
       setLoading(false);
     } catch (error) {
       setLoading(false);
@@ -57,8 +56,6 @@ const AppliedJobDetails = ({ activeJobId }) => {
     location,
     createdAt,
   } = jobDetails;
-
-  console.log(activeAppliedJob);
 
   return (
     <section className={`applied-job-details ${showJobDetails && `show`}`}>

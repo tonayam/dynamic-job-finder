@@ -11,6 +11,7 @@ const AppProvider = ({ children }) => {
   const [allJobs, setAllJobs] = useState([]);
   const [activeJob, setActiveJob] = useState({});
   const [activeAppliedJob, setActiveAppliedJob] = useState({});
+  const [activeSavedJob, setActiveSavedJob] = useState({});
 
   const [jobApplicationInfo, setJobApplicationInfo] = useState({
     job: ``,
@@ -56,6 +57,8 @@ const AppProvider = ({ children }) => {
         setActiveJob,
         activeAppliedJob,
         setActiveAppliedJob,
+        activeSavedJob,
+        setActiveSavedJob,
         jobApplicationInfo,
         setJobApplicationInfo,
       }}

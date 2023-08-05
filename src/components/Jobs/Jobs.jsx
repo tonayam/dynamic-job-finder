@@ -65,11 +65,17 @@ export const AppliedJob = ({ company, position, location, timePosted, id }) => {
 };
 
 // JOB COMPONENT FOR SAVED JOBS
-export const SavedJob = ({ company, position, location, timePosted }) => {
-  const { setShowJobDetails } = useGlobalContext();
+export const SavedJob = ({ company, position, location, timePosted, id }) => {
+  const { setShowJobDetails, activeJob, setActiveJob } = useGlobalContext();
 
   return (
-    <div className='saved-job' onClick={() => setShowJobDetails(true)}>
+    <div
+      className={`saved-job ${id === activeJob ? `active-job` : ``}`}
+      onClick={() => {
+        setActiveJob(id);
+        setShowJobDetails(true);
+      }}
+    >
       <div className='company'>
         <h2>{company}</h2>
       </div>

@@ -71,6 +71,7 @@ const JobDetails = () => {
       );
       setLoading(false);
       toast.success(`Job Saved`);
+      fetchSavedJobs();
     } catch (error) {
       setLoading(false);
       console.log(error.response.data.msg);
@@ -87,7 +88,7 @@ const JobDetails = () => {
       fetchSavedJobs();
     }
     // eslint-disable-next-line
-  }, []);
+  }, [activeJob]);
 
   if (loading) {
     return (
@@ -152,8 +153,12 @@ const JobDetails = () => {
               }}
               type='button'
             >
-              {savedJob ? `Saved` : `Save`}{' '}
-              {savedJob ? <BsBookmarkFill className='saved' /> : <BsBookmark />}
+              {savedJob.length > 0 ? `Saved` : `Save`}{' '}
+              {savedJob.length > 0 ? (
+                <BsBookmarkFill className='saved' />
+              ) : (
+                <BsBookmark />
+              )}
             </button>
           </div>
         </div>

@@ -7,16 +7,37 @@ import { useGlobalContext } from '../../context/context';
 import { useEffect } from 'react';
 import { AppliedJobSkeleton } from '../../components/Skeleton-Loaders/SkeletonLoaders';
 import AppliedJobDetails from '../../components/Applied-Job-Details/AppliedJobDetails';
+import JobDetails from '../../components/Job-Details/JobDetails';
 
 const MyJobs = () => {
   const [currentTab, setCurrentTab] = useState(`saved`);
+  const [savedJobs, setSavedJobs] = useState([]);
   const [appliedJobs, setAppliedJobs] = useState([]);
+  const [savedJobsLoading, setSavedJobsLoading] = useState(true);
   const [appliedJobsLoading, setAppliedJobsLoading] = useState(true);
-  const { baseURL, setActiveAppliedJob, activeAppliedJob } = useGlobalContext();
+  const { baseURL, setActiveAppliedJob, setActiveJob } = useGlobalContext();
   const { token } = JSON.parse(sessionStorage.getItem(`userInfo`))
     ? JSON.parse(sessionStorage.getItem(`userInfo`))
     : ``;
 
+  // FETCH JOBS SAVE
+  const fetchSavedJobs = async () => {
+    try {
+      setSavedJobsLoading(true);
+      const { data } = await axios.get(`${baseURL}/saved-jobs`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      setSavedJobs(data.savedJobs);
+      setActiveJob(data.savedJobs[0].job._id);
+      setSavedJobsLoading(false);
+    } catch (error) {
+      setSavedJobsLoading(false);
+    }
+  };
+
+  // FETCH JOBS APPLIED FOR
   const fetchAppliedJobs = async () => {
     try {
       setAppliedJobsLoading(true);
@@ -34,6 +55,7 @@ const MyJobs = () => {
 
   useEffect(() => {
     fetchAppliedJobs();
+    fetchSavedJobs();
     // eslint-disable-next-line
   }, []);
 
@@ -47,7 +69,7 @@ const MyJobs = () => {
             className={currentTab === `saved` ? `active` : null}
             onClick={() => setCurrentTab(`saved`)}
           >
-            0 Saved
+            {savedJobsLoading ? 0 : savedJobs.length} Saved
           </li>
           <li
             className={currentTab === `applied` ? `active` : null}
@@ -61,18 +83,25 @@ const MyJobs = () => {
       <div className='jobs-container'>
         <div className='jobs-list'>
           {currentTab === `saved` ? (
-            miniJobs.map((job, jobIndex) => {
-              const { company, location, position, timePosted } = job;
-              return (
-                <SavedJob
-                  key={jobIndex}
-                  company={company}
-                  location={location}
-                  position={position}
-                  timePosted={timePosted}
-                />
-              );
-            })
+            savedJobsLoading ? (
+              <AppliedJobSkeleton cards={5} />
+            ) : (
+              savedJobs.map((job) => {
+                const { _id, job: savedJob } = job;
+                return (
+                  <SavedJob
+                    key={_id}
+                    id={savedJob._id}
+                    company={savedJob.companyName}
+                    location={savedJob.location}
+                    position={savedJob.jobTitle}
+                    timePosted={new Date(
+                      savedJob.createdAt
+                    ).toLocaleDateString()}
+                  />
+                );
+              })
+            )
           ) : appliedJobsLoading ? (
             <AppliedJobSkeleton cards={5} />
           ) : (
@@ -95,7 +124,7 @@ const MyJobs = () => {
           )}
         </div>
         {/* JOB DETAILS */}
-        <AppliedJobDetails />
+        {currentTab === `saved` ? <JobDetails /> : <AppliedJobDetails />}
       </div>
     </main>
   );
