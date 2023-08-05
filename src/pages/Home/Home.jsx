@@ -28,7 +28,7 @@ const Home = () => {
                       location,
                       jobTitle,
                       createdAt,
-                      _id: jobId,
+                      id: jobId,
                     } = job;
                     const datePosted = new Date(createdAt).toLocaleDateString();
                     return (

@@ -6,7 +6,8 @@ import loader from '../../assets/purple-loader.svg';
 
 const MobileJobInfo = () => {
   const [jobDetails, setJobDetails] = useState(false);
-  const { activeJob, baseURL } = useGlobalContext();
+  const { activeJob, baseURL, jobApplicationInfo, setJobApplicationInfo } =
+    useGlobalContext();
   const [details, setDetails] = useState({});
   const [loading, setLoading] = useState(true);
 
@@ -15,6 +16,11 @@ const MobileJobInfo = () => {
       setLoading(true);
       const { data } = await axios.get(`${baseURL}/jobs/${activeJob}`);
       setDetails(data.job);
+      setJobApplicationInfo({
+        ...jobApplicationInfo,
+        job: data.job._id,
+        employer: data.job.createdBy,
+      });
       setLoading(false);
     } catch (error) {
       setLoading(false);
@@ -25,6 +31,7 @@ const MobileJobInfo = () => {
     fetchJob();
     // eslint-disable-next-line
   }, [activeJob]);
+
   return (
     <div className='mobile-job-info'>
       {loading ? (

@@ -17,6 +17,9 @@ const JobDetails = () => {
   const navigate = useNavigate();
   const [jobDetails, setJobDetails] = useState({});
   const [loading, setLoading] = useState(true);
+  const { token } = JSON.parse(sessionStorage.getItem(`userInfo`))
+    ? JSON.parse(sessionStorage.getItem(`userInfo`))
+    : ``;
 
   const fetchJob = async () => {
     try {
@@ -75,7 +78,13 @@ const JobDetails = () => {
           <div className='btns'>
             <button
               className='blue apply'
-              onClick={() => navigate(`/job-application/${_id}`)}
+              onClick={() => {
+                if (token) {
+                  navigate(`/job-application/${_id}`);
+                } else {
+                  navigate(`/sign-in`);
+                }
+              }}
             >
               Apply
             </button>

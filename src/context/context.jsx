@@ -10,12 +10,26 @@ const AppProvider = ({ children }) => {
   const [lastRoute, setLastRoute] = useState(``);
   const [allJobs, setAllJobs] = useState([]);
   const [activeJob, setActiveJob] = useState({});
+  const [jobApplicationInfo, setJobApplicationInfo] = useState({
+    job: ``,
+    employer: ``,
+    firstName: ``,
+    lastName: ``,
+    email: ``,
+    city: ``,
+    phone: ``,
+    resume: ``,
+    coverLetter: ``,
+    expectedSalary: ``,
+    noticePeriod: ``,
+    applicationReason: ``,
+  });
 
   const fetchAllJobs = async () => {
     try {
       const { data } = await axios.get(`${baseURL}/jobs`);
       setAllJobs(data.jobs);
-      setActiveJob(data.jobs[0]._id);
+      setActiveJob(data.jobs[0].id);
     } catch (error) {}
   };
 
@@ -38,6 +52,8 @@ const AppProvider = ({ children }) => {
         fetchAllJobs,
         activeJob,
         setActiveJob,
+        jobApplicationInfo,
+        setJobApplicationInfo,
       }}
     >
       {children}
