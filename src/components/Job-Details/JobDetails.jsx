@@ -9,6 +9,7 @@ import { useGlobalContext } from '../../context/context';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import loader from '../../assets/purple-loader.svg';
+import { toast } from 'react-toastify';
 
 const JobDetails = () => {
   const { setShowJobDetails, showJobDetails, activeJob, baseURL } =
@@ -17,10 +18,12 @@ const JobDetails = () => {
   const navigate = useNavigate();
   const [jobDetails, setJobDetails] = useState({});
   const [loading, setLoading] = useState(true);
+  const [savedJob, setSavedJob] = useState(``);
   const { token } = JSON.parse(sessionStorage.getItem(`userInfo`))
     ? JSON.parse(sessionStorage.getItem(`userInfo`))
     : ``;
 
+  // GET JOB DETAILS
   const fetchJob = async () => {
     try {
       setLoading(true);
@@ -32,10 +35,59 @@ const JobDetails = () => {
     }
   };
 
+  // GET THE SAVE STATUS OF A PARTICULAR JOB
+  const fetchSavedJobs = async () => {
+    try {
+      setLoading(true);
+      const { data } = await axios.get(`${baseURL}/saved-jobs`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      setSavedJob(
+        data.savedJobs.filter((savedJob) => savedJob.job._id === activeJob)
+      );
+      setLoading(false);
+    } catch (error) {
+      setLoading(false);
+    }
+  };
+
+  // SAVE A JOB
+  const submitSavedJob = async (e) => {
+    try {
+      setLoading(true);
+      const { data } = await axios.post(
+        `${baseURL}/saved-jobs`,
+        {
+          job: jobDetails._id,
+          employer: jobDetails.createdBy,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      setLoading(false);
+      toast.success(`Job Saved`);
+    } catch (error) {
+      setLoading(false);
+      console.log(error.response.data.msg);
+    }
+  };
+
   useEffect(() => {
     fetchJob();
     // eslint-disable-next-line
   }, [activeJob]);
+
+  useEffect(() => {
+    if (jobDetails) {
+      fetchSavedJobs();
+    }
+    // eslint-disable-next-line
+  }, []);
 
   if (loading) {
     return (
@@ -90,10 +142,18 @@ const JobDetails = () => {
             </button>
             <button
               className='transparent save'
-              onClick={() => setSaveJob(!saveJob)}
+              onClick={() => {
+                if (token) {
+                  submitSavedJob();
+                  setSaveJob(!saveJob);
+                } else {
+                  navigate(`/sign-in`);
+                }
+              }}
+              type='button'
             >
-              Save{' '}
-              {saveJob ? <BsBookmarkFill className='saved' /> : <BsBookmark />}
+              {savedJob ? `Saved` : `Save`}{' '}
+              {savedJob ? <BsBookmarkFill className='saved' /> : <BsBookmark />}
             </button>
           </div>
         </div>
