@@ -8,16 +8,15 @@ import { FcGraduationCap } from 'react-icons/fc';
 import { useGlobalContext } from '../../context/context';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import loader from '../../assets/purple-loader.svg';
 import { toast } from 'react-toastify';
+import { JobDetailsSkeleton } from '../Skeleton-Loaders/SkeletonLoaders';
 
 const JobDetails = () => {
   const { setShowJobDetails, showJobDetails, activeJob, baseURL } =
     useGlobalContext();
   const [saveJob, setSaveJob] = useState(false);
   const navigate = useNavigate();
-  const [jobDetails, setJobDetails] = useState({});
-  const [loading, setLoading] = useState(true);
+  const [jobDetails, setJobDetails] = useState({ jobTitle: `` });
   const [savedJob, setSavedJob] = useState(``);
   const { token } = JSON.parse(sessionStorage.getItem(`userInfo`))
     ? JSON.parse(sessionStorage.getItem(`userInfo`))
@@ -26,19 +25,14 @@ const JobDetails = () => {
   // GET JOB DETAILS
   const fetchJob = async () => {
     try {
-      setLoading(true);
       const { data } = await axios.get(`${baseURL}/jobs/${activeJob}`);
       setJobDetails(data.job);
-      setLoading(false);
-    } catch (error) {
-      setLoading(false);
-    }
+    } catch (error) {}
   };
 
   // GET THE SAVE STATUS OF A PARTICULAR JOB
   const fetchSavedJobs = async () => {
     try {
-      setLoading(true);
       const { data } = await axios.get(`${baseURL}/saved-jobs`, {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -47,16 +41,12 @@ const JobDetails = () => {
       setSavedJob(
         data.savedJobs.filter((savedJob) => savedJob.job._id === activeJob)
       );
-      setLoading(false);
-    } catch (error) {
-      setLoading(false);
-    }
+    } catch (error) {}
   };
 
   // SAVE A JOB
   const submitSavedJob = async (e) => {
     try {
-      setLoading(true);
       await axios.post(
         `${baseURL}/saved-jobs`,
         {
@@ -69,11 +59,9 @@ const JobDetails = () => {
           },
         }
       );
-      setLoading(false);
       toast.success(`Job Saved`);
       fetchSavedJobs();
     } catch (error) {
-      setLoading(false);
       console.log(error.response.data.msg);
     }
   };
@@ -81,7 +69,6 @@ const JobDetails = () => {
   // REMOVE A JOB FROM THE LIST OF SAVED JOBS
   const removeSavedJob = async (jobId) => {
     try {
-      setLoading(true);
       await axios.delete(`${baseURL}/saved-jobs/${jobId}`, {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -90,7 +77,6 @@ const JobDetails = () => {
       toast.success(`Job Unsaved`);
       fetchSavedJobs();
     } catch (error) {
-      setLoading(false);
       console.log(error.response.data.msg);
     }
   };
@@ -107,13 +93,11 @@ const JobDetails = () => {
     // eslint-disable-next-line
   }, [activeJob]);
 
-  if (loading) {
+  if (!jobDetails.jobTitle) {
     return (
-      <section className={`job-details ${showJobDetails && `show`}`}>
-        <div className='loader'>
-          <img src={loader} alt='' />
-        </div>
-      </section>
+      <div className='job-details'>
+        <JobDetailsSkeleton />
+      </div>
     );
   }
 

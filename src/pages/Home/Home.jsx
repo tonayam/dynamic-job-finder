@@ -4,7 +4,7 @@ import { JobListingJob } from '../../components/Jobs/Jobs';
 import JobDetails from '../../components/Job-Details/JobDetails';
 import JobFilters from '../../components/Job-Filters/JobFilters';
 import { useGlobalContext } from '../../context/context';
-import loader from '../../assets/purple-loader.svg';
+import { JobCardSkeleton } from '../../components/Skeleton-Loaders/SkeletonLoaders';
 
 const Home = () => {
   const { allJobs } = useGlobalContext();
@@ -44,9 +44,7 @@ const Home = () => {
                   })}
                 </>
               ) : (
-                <div className='loader'>
-                  <img src={loader} alt='' />
-                </div>
+                <JobCardSkeleton cards={10} />
               )}
             </div>
 

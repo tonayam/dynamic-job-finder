@@ -1,5 +1,5 @@
 // IMPORT ALL YOUR PAGES HERE SO THEY CAN BE NAME EXPORTED
-import { SignIn, SignUp } from './Auth/Auth';
+import { EmployerSignUp, SignIn, UserSignUp } from './Auth/Auth';
 import Home from './Home/Home';
 import Profile from './Profile/Profile';
 import AccountSettings from './Account-Settings/AccountSettings';
@@ -10,8 +10,9 @@ import CreateJob from './Create-Job/CreateJob';
 import ContactUs from './Contact-Us/ContactUs';
 
 export {
-  SignUp,
+  EmployerSignUp,
   SignIn,
+  UserSignUp,
   Home,
   Profile,
   AccountSettings,

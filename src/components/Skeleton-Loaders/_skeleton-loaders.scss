@@ -1,6 +1,47 @@
-.applied-job-skeleton {
+.job-card-skeleton {
     margin-bottom: 1.5rem;
     padding: 1rem;
     border: 1px solid $borderColor;
     border-radius: 10px;
+}
+
+.job-details-skeleton {
+    .company {
+        margin-bottom: 1rem;
+        width: 30%;
+    }
+
+    .job-title {
+        width: 60%;
+        height: 26px;
+        margin-bottom: 1rem;
+    }
+
+    .location-time {
+        @include flex(center, space-between, row);
+        margin-bottom: 1.5rem;
+        width: 100%;
+
+        .location,
+        .time {
+            width: 150px;
+            height: 20px;
+            flex: 0.5
+        }
+    }
+
+    .btns {
+        @include flex(center, space-between, row);
+        margin-bottom: 1.5rem;
+
+        .btn {
+            width: clamp(100px, 25vw, 300px);
+            height: 48px;
+        }
+    }
+
+    .job-description {
+        width: 50%;
+        height: 32px;
+    }
 }

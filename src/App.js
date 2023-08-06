@@ -12,7 +12,8 @@ import {
   MyJobs,
   Profile,
   SignIn,
-  SignUp,
+  UserSignUp,
+  EmployerSignUp,
 } from './pages';
 import { Slide, ToastContainer } from 'react-toastify';
 import EmployerRoutes from './pages/EmployerRoutes';
@@ -31,7 +32,8 @@ function App() {
       <SkeletonTheme>
         <Routes>
           <Route path='/' element={<Home />} />
-          <Route path='/sign-up' element={<SignUp />} />
+          <Route path='/sign-up' element={<UserSignUp />} />
+          <Route path='/sign-up/employer' element={<EmployerSignUp />} />
           <Route path='/sign-in' element={<SignIn />} />
           <Route path='/my-profile' element={<Profile />} />
           <Route path='/account-settings' element={<AccountSettings />} />

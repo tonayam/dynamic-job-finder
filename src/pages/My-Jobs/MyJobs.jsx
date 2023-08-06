@@ -4,7 +4,7 @@ import Navbar from '../../components/Navbar/Navbar';
 import axios from 'axios';
 import { useGlobalContext } from '../../context/context';
 import { useEffect } from 'react';
-import { AppliedJobSkeleton } from '../../components/Skeleton-Loaders/SkeletonLoaders';
+import { JobCardSkeleton } from '../../components/Skeleton-Loaders/SkeletonLoaders';
 import AppliedJobDetails from '../../components/Applied-Job-Details/AppliedJobDetails';
 import JobDetails from '../../components/Job-Details/JobDetails';
 
@@ -83,7 +83,7 @@ const MyJobs = () => {
         <div className='jobs-list'>
           {currentTab === `saved` ? (
             savedJobsLoading ? (
-              <AppliedJobSkeleton cards={5} />
+              <JobCardSkeleton cards={5} />
             ) : (
               savedJobs.map((job) => {
                 const { _id, job: savedJob } = job;
@@ -102,7 +102,7 @@ const MyJobs = () => {
               })
             )
           ) : appliedJobsLoading ? (
-            <AppliedJobSkeleton cards={5} />
+            <JobCardSkeleton cards={5} />
           ) : (
             appliedJobs.map((job) => {
               const { job: jobDetails, _id } = job;
