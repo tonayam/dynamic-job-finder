@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { RiCloseFill } from 'react-icons/ri';
-import { BsHourglassSplit, BsBookmark, BsBookmarkFill } from 'react-icons/bs';
+import { BsHourglassSplit } from 'react-icons/bs';
 import { SlCalender } from 'react-icons/sl';
 import { FaMoneyBill, FaGenderless } from 'react-icons/fa';
 import { GrUserExpert } from 'react-icons/gr';
@@ -14,9 +14,9 @@ const AppliedJobDetails = ({ activeJobId }) => {
     useGlobalContext();
   const [jobDetails, setJobDetails] = useState({});
   const [loading, setLoading] = useState(true);
-  const { token } = JSON.parse(sessionStorage.getItem(`userInfo`))
-    ? JSON.parse(sessionStorage.getItem(`userInfo`))
-    : ``;
+  // const { token } = JSON.parse(sessionStorage.getItem(`userInfo`))
+  //   ? JSON.parse(sessionStorage.getItem(`userInfo`))
+  //   : ``;
 
   const fetchJob = async () => {
     try {

@@ -57,7 +57,7 @@ const JobDetails = () => {
   const submitSavedJob = async (e) => {
     try {
       setLoading(true);
-      const { data } = await axios.post(
+      await axios.post(
         `${baseURL}/saved-jobs`,
         {
           job: jobDetails._id,
@@ -71,6 +71,23 @@ const JobDetails = () => {
       );
       setLoading(false);
       toast.success(`Job Saved`);
+      fetchSavedJobs();
+    } catch (error) {
+      setLoading(false);
+      console.log(error.response.data.msg);
+    }
+  };
+
+  // REMOVE A JOB FROM THE LIST OF SAVED JOBS
+  const removeSavedJob = async (jobId) => {
+    try {
+      setLoading(true);
+      await axios.delete(`${baseURL}/saved-jobs/${jobId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      toast.success(`Job Unsaved`);
       fetchSavedJobs();
     } catch (error) {
       setLoading(false);
@@ -144,8 +161,11 @@ const JobDetails = () => {
             <button
               className='transparent save'
               onClick={() => {
-                if (token) {
+                if (token && savedJob.length < 1) {
                   submitSavedJob();
+                  setSaveJob(!saveJob);
+                } else if (token && savedJob.length > 0) {
+                  removeSavedJob(savedJob[0]._id);
                   setSaveJob(!saveJob);
                 } else {
                   navigate(`/sign-in`);

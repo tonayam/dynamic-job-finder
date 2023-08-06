@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { AppliedJob, SavedJob } from '../../components/Jobs/Jobs';
-import { miniJobs } from '../../data/data';
 import Navbar from '../../components/Navbar/Navbar';
 import axios from 'axios';
 import { useGlobalContext } from '../../context/context';
