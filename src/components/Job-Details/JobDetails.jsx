@@ -8,7 +8,6 @@ import { FcGraduationCap } from 'react-icons/fc';
 import { useGlobalContext } from '../../context/context';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { toast } from 'react-toastify';
 import { JobDetailsSkeleton } from '../Skeleton-Loaders/SkeletonLoaders';
 
 const JobDetails = () => {
@@ -59,7 +58,6 @@ const JobDetails = () => {
           },
         }
       );
-      toast.success(`Job Saved`);
       fetchSavedJobs();
     } catch (error) {
       console.log(error.response.data.msg);
@@ -74,7 +72,6 @@ const JobDetails = () => {
           Authorization: `Bearer ${token}`,
         },
       });
-      toast.success(`Job Unsaved`);
       fetchSavedJobs();
     } catch (error) {
       console.log(error.response.data.msg);
@@ -82,12 +79,14 @@ const JobDetails = () => {
   };
 
   useEffect(() => {
-    fetchJob();
+    if (activeJob) {
+      fetchJob();
+    }
     // eslint-disable-next-line
   }, [activeJob]);
 
   useEffect(() => {
-    if (jobDetails) {
+    if (jobDetails && token) {
       fetchSavedJobs();
     }
     // eslint-disable-next-line

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Navbar from '../../components/Navbar/Navbar';
 import { JobListingJob } from '../../components/Jobs/Jobs';
 import JobDetails from '../../components/Job-Details/JobDetails';
@@ -7,7 +7,12 @@ import { useGlobalContext } from '../../context/context';
 import { JobCardSkeleton } from '../../components/Skeleton-Loaders/SkeletonLoaders';
 
 const Home = () => {
-  const { allJobs } = useGlobalContext();
+  const { allJobs, fetchAllJobs } = useGlobalContext();
+
+  useEffect(() => {
+    fetchAllJobs();
+    // eslint-disable-next-line
+  }, []);
 
   return (
     <main className='home-page'>

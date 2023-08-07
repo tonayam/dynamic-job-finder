@@ -6,9 +6,10 @@ import * as Yup from 'yup';
 import axios from 'axios';
 import { useGlobalContext } from '../../context/context';
 import loader from '../../assets/white-loader.svg';
+import { toast } from 'react-toastify';
 
 const CreateJob = () => {
-  const { baseURL } = useGlobalContext();
+  const { baseURL, fetchAllJobs } = useGlobalContext();
   const [desc, setDesc] = useState(``);
   const [loading, setLoading] = useState(false);
   const { token } = JSON.parse(sessionStorage.getItem(`userInfo`));
@@ -61,9 +62,12 @@ const CreateJob = () => {
       );
       console.log(response);
       setLoading(false);
+      toast.success(`Jop Posted Successfully`);
+      fetchAllJobs();
     } catch (error) {
       console.log(error);
       setLoading(false);
+      toast.error(error.response.data.msg);
     }
   };
 

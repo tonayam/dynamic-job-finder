@@ -7,6 +7,7 @@ import { useEffect } from 'react';
 import { JobCardSkeleton } from '../../components/Skeleton-Loaders/SkeletonLoaders';
 import AppliedJobDetails from '../../components/Applied-Job-Details/AppliedJobDetails';
 import JobDetails from '../../components/Job-Details/JobDetails';
+import { Link } from 'react-router-dom';
 
 const MyJobs = () => {
   const [currentTab, setCurrentTab] = useState(`saved`);
@@ -28,8 +29,10 @@ const MyJobs = () => {
           Authorization: `Bearer ${token}`,
         },
       });
-      setSavedJobs(data.savedJobs);
-      setActiveJob(data.savedJobs[0].job._id);
+      if (data) {
+        setSavedJobs(data.savedJobs);
+        setActiveJob(data.savedJobs[0].job._id);
+      }
       setSavedJobsLoading(false);
     } catch (error) {
       setSavedJobsLoading(false);
@@ -43,12 +46,13 @@ const MyJobs = () => {
       const { data } = await axios.get(`${baseURL}/job-applications`, {
         headers: { Authorization: `Bearer ${token}` },
       });
-      setAppliedJobs(data.appliedJobs);
-      setActiveAppliedJob(data.appliedJobs[0].job._id);
+      if (data) {
+        setAppliedJobs(data.appliedJobs);
+        setActiveAppliedJob(data.appliedJobs[0].job._id);
+      }
       setAppliedJobsLoading(false);
     } catch (error) {
       setAppliedJobsLoading(false);
-      console.log(error.response.data.msg);
     }
   };
 
@@ -79,52 +83,66 @@ const MyJobs = () => {
         </ul>
       </div>
 
-      <div className='jobs-container'>
-        <div className='jobs-list'>
-          {currentTab === `saved` ? (
-            savedJobsLoading ? (
+      {currentTab === `saved` && !savedJobsLoading && savedJobs.length < 1 ? (
+        <div className='no-jobs-container'>
+          <h3>You haven't saved any job yet.</h3>
+          <Link to='/'>Expolore Jobs</Link>
+        </div>
+      ) : currentTab === `applied` &&
+        !appliedJobsLoading &&
+        appliedJobs.length < 1 ? (
+        <div className='no-jobs-container'>
+          <h3>You haven't applied for any jobs yet.</h3>
+          <Link to='/'>Expolore Jobs</Link>
+        </div>
+      ) : (
+        <div className='jobs-container'>
+          <div className='jobs-list'>
+            {currentTab === `saved` ? (
+              savedJobsLoading ? (
+                <JobCardSkeleton cards={5} />
+              ) : (
+                savedJobs.map((job) => {
+                  const { _id, job: savedJob } = job;
+                  return (
+                    <SavedJob
+                      key={_id}
+                      id={savedJob._id}
+                      company={savedJob.companyName}
+                      location={savedJob.location}
+                      position={savedJob.jobTitle}
+                      timePosted={new Date(
+                        savedJob.createdAt
+                      ).toLocaleDateString()}
+                    />
+                  );
+                })
+              )
+            ) : appliedJobsLoading ? (
               <JobCardSkeleton cards={5} />
             ) : (
-              savedJobs.map((job) => {
-                const { _id, job: savedJob } = job;
+              appliedJobs.map((job) => {
+                const { job: jobDetails, _id } = job;
+
                 return (
-                  <SavedJob
+                  <AppliedJob
                     key={_id}
-                    id={savedJob._id}
-                    company={savedJob.companyName}
-                    location={savedJob.location}
-                    position={savedJob.jobTitle}
+                    id={jobDetails._id}
+                    company={jobDetails.companyName}
+                    location={jobDetails.location}
+                    position={jobDetails.jobTitle}
                     timePosted={new Date(
-                      savedJob.createdAt
+                      jobDetails.createdAt
                     ).toLocaleDateString()}
                   />
                 );
               })
-            )
-          ) : appliedJobsLoading ? (
-            <JobCardSkeleton cards={5} />
-          ) : (
-            appliedJobs.map((job) => {
-              const { job: jobDetails, _id } = job;
-
-              return (
-                <AppliedJob
-                  key={_id}
-                  id={jobDetails._id}
-                  company={jobDetails.companyName}
-                  location={jobDetails.location}
-                  position={jobDetails.jobTitle}
-                  timePosted={new Date(
-                    jobDetails.createdAt
-                  ).toLocaleDateString()}
-                />
-              );
-            })
-          )}
+            )}
+          </div>
+          {/* JOB DETAILS */}
+          {currentTab === `saved` ? <JobDetails /> : <AppliedJobDetails />}
         </div>
-        {/* JOB DETAILS */}
-        {currentTab === `saved` ? <JobDetails /> : <AppliedJobDetails />}
-      </div>
+      )}
     </main>
   );
 };

@@ -9,7 +9,7 @@ const AppProvider = ({ children }) => {
   const [applicationStep, setApplicationStep] = useState(1);
   const [lastRoute, setLastRoute] = useState(``);
   const [allJobs, setAllJobs] = useState([]);
-  const [activeJob, setActiveJob] = useState({});
+  const [activeJob, setActiveJob] = useState(``);
   const [activeAppliedJob, setActiveAppliedJob] = useState({});
   const [activeSavedJob, setActiveSavedJob] = useState({});
 
@@ -32,7 +32,7 @@ const AppProvider = ({ children }) => {
     try {
       const { data } = await axios.get(`${baseURL}/jobs`);
       setAllJobs(data.jobs);
-      setActiveJob(data.jobs[0].id);
+      setActiveJob(data.jobs[0]._id);
     } catch (error) {}
   };
 

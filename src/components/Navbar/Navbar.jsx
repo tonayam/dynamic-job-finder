@@ -5,7 +5,6 @@ import {
   RiSearch2Line,
   RiUserLine,
 } from 'react-icons/ri';
-import { mobileNavLinksBatch1, mobileNavLinksBatch2 } from '../../data/data';
 import { Link, useNavigate } from 'react-router-dom';
 
 const Navbar = () => {
@@ -35,25 +34,38 @@ const Navbar = () => {
           <RiUserLine />
           <div className={`items ${showProfileLinks ? `show` : null}`}>
             <ul>
-              {mobileNavLinksBatch1.map((item, linkIndex) => {
-                const { link, name } = item;
-                return (
-                  <li key={linkIndex}>
-                    <Link to={link}>{name}</Link>
-                  </li>
-                );
-              })}
-            </ul>
-            <div className='divider'></div>
-            <ul>
-              {mobileNavLinksBatch2.map((item, linkIndex) => {
-                const { link, name } = item;
-                return (
-                  <li key={linkIndex}>
-                    <Link to={link}>{name}</Link>
-                  </li>
-                );
-              })}
+              <li>
+                <Link to='/'>Jobs</Link>
+              </li>
+              {userInfo && (
+                <li>
+                  <Link to='/'>company reviews</Link>
+                </li>
+              )}
+              {userInfo.role === `employer` && (
+                <li>
+                  <Link to='/create-job'>Post Job</Link>
+                </li>
+              )}
+              <div className='divider'></div>
+              {userInfo && (
+                <li>
+                  <Link to='/my-profile'>Profile</Link>
+                </li>
+              )}
+              {userInfo && (
+                <li>
+                  <Link to='/my-jobs'>My jobs</Link>
+                </li>
+              )}
+              {userInfo && (
+                <li>
+                  <Link to='/account-settings'>Account Settings</Link>
+                </li>
+              )}
+              <li>
+                <Link to='/contact-us'>Contact us</Link>
+              </li>
             </ul>
             {userInfo ? (
               <p
@@ -83,26 +95,40 @@ const Navbar = () => {
         <div className='close-btn'>
           <RiCloseFill onClick={() => setShowNav(false)} />
         </div>
+
         <ul>
-          {mobileNavLinksBatch1.map((item, linkIndex) => {
-            const { link, name } = item;
-            return (
-              <li key={linkIndex}>
-                <Link to={link}>{name}</Link>
-              </li>
-            );
-          })}
-        </ul>
-        <div className='divider'></div>
-        <ul>
-          {mobileNavLinksBatch2.map((item, linkIndex) => {
-            const { link, name } = item;
-            return (
-              <li key={linkIndex}>
-                <Link to={link}>{name}</Link>
-              </li>
-            );
-          })}
+          <li>
+            <Link to='/'>Jobs</Link>
+          </li>
+          {userInfo && (
+            <li>
+              <Link to='/'>company reviews</Link>
+            </li>
+          )}
+          {userInfo.role === `employer` && (
+            <li>
+              <Link to='/create-job'>Post Job</Link>
+            </li>
+          )}
+          <div className='divider'></div>
+          {userInfo && (
+            <li>
+              <Link to='/my-profile'>Profile</Link>
+            </li>
+          )}
+          {userInfo && (
+            <li>
+              <Link to='/my-jobs'>My jobs</Link>
+            </li>
+          )}
+          {userInfo && (
+            <li>
+              <Link to='/account-settings'>Account Settings</Link>
+            </li>
+          )}
+          <li>
+            <Link to='/contact-us'>Contact us</Link>
+          </li>
         </ul>
         {userInfo ? (
           <p
