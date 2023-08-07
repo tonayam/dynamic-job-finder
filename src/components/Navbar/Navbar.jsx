@@ -65,9 +65,11 @@ const Navbar = () => {
                 Sign Out
               </p>
             ) : (
-              <Link to='/sign-in' className='sign-in'>
-                Sign In
-              </Link>
+              <ul>
+                <li>
+                  <Link to='/sign-in'>Sign In</Link>
+                </li>
+              </ul>
             )}
           </div>
         </div>
@@ -102,15 +104,22 @@ const Navbar = () => {
             );
           })}
         </ul>
-        <p
-          onClick={() => {
-            navigate(`/`);
-            sessionStorage.removeItem(`userInfo`);
-            console.log(`clicked`);
-          }}
-        >
-          Sign Out
-        </p>
+        {userInfo ? (
+          <p
+            onClick={() => {
+              sessionStorage.removeItem(`userInfo`);
+              navigate(`/`);
+            }}
+          >
+            Sign Out
+          </p>
+        ) : (
+          <ul>
+            <li>
+              <Link to='/sign-in'>Sign In</Link>
+            </li>
+          </ul>
+        )}
       </div>
     </nav>
   );
