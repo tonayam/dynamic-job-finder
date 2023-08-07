@@ -226,6 +226,12 @@
                             color: red;
                         }
                     }
+
+                    .sign-in {
+                        &:hover {
+                            color: $secondaryColor;
+                        }
+                    }
                 }
             }
         }

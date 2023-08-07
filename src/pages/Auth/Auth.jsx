@@ -168,14 +168,52 @@ export const UserSignUp = () => {
 };
 
 export const EmployerSignUp = () => {
-  // const signUpUser = () => {
-  //   try {
-  //   } catch (error) {
-  //     console.log(error.response.data.msg);
-  //   }
-  // };
-
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
+  const { baseURL } = useGlobalContext();
+  const formik = useFormik({
+    initialValues: {
+      companyName: ``,
+      email: ``,
+      password: ``,
+      companyDesc: ``,
+    },
+    validationSchema: Yup.object({
+      companyName: Yup.string().required('Company name is required'),
+      companyDesc: Yup.string().required('What does your company do?'),
+      email: Yup.string().email(`Invalid email`).required(`Email is required`),
+      password: Yup.string()
+        .min(8, `Minimum of 8 characters`)
+        .matches(
+          /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
+          'At least 1 special character and a number'
+        )
+        .required('Password is required'),
+    }),
+    onSubmit() {
+      signUpEmployer();
+    },
+  });
+
+  const signUpEmployer = async () => {
+    try {
+      setLoading(true);
+      const { data } = await axios.post(`${baseURL}/auth/employer/register`, {
+        companyName: formik.values.companyName.toLocaleLowerCase(),
+        companyDesc: formik.values.companyDesc.toLocaleLowerCase(),
+        email: formik.values.email.toLocaleLowerCase(),
+        password: formik.values.password,
+      });
+      setLoading(false);
+      console.log(data);
+      sessionStorage.setItem(`userInfo`, JSON.stringify(data));
+      toast.success(`Registration Successfull`);
+      navigate(`/`);
+    } catch (error) {
+      setLoading(false);
+      toast.error(error.response.data.msg);
+    }
+  };
 
   return (
     <main className='sign-up-page employer-sign-up'>
@@ -188,7 +226,7 @@ export const EmployerSignUp = () => {
       </div>
 
       <div className='form-container'>
-        <form action=''>
+        <form action='' onSubmit={formik.handleSubmit}>
           <h2 className='title'>Sign Up</h2>
 
           <div className='options'>
@@ -196,42 +234,101 @@ export const EmployerSignUp = () => {
             <h3 className='active'>Employer</h3>
           </div>
 
-          {/* JOB SEEKER NAME/COMPANY NAME */}
+          {/* COMPANY NAME */}
           <div className='form-control'>
-            <label htmlFor='name'>Company Name</label>
-            <input type='name' id='name' name='name' placeholder='John Doe' />
+            <label
+              htmlFor='company-name'
+              className={
+                formik.errors.companyName &&
+                formik.touched.companyName &&
+                `error`
+              }
+            >
+              {formik.errors.companyName && formik.touched.companyName
+                ? formik.errors.companyName
+                : `Company Name`}
+            </label>
+            <input
+              type='name'
+              id='company-name'
+              name='companyName'
+              placeholder='John Doe'
+              value={formik.values.companyName}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+            />
           </div>
 
           {/* EMAIL */}
           <div className='form-control'>
-            <label htmlFor='email'>Email</label>
+            <label
+              htmlFor='email'
+              className={formik.errors.email && formik.touched.email && `error`}
+            >
+              {formik.errors.email && formik.touched.email
+                ? formik.errors.email
+                : `Email`}
+            </label>
             <input
               type='email'
               id='email'
               name='email'
               placeholder='johndoe@gmail.com'
+              value={formik.values.email}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
             />
           </div>
 
           {/* PASSWORD */}
           <div className='form-control'>
-            <label htmlFor='password'>Password</label>
+            <label
+              htmlFor='password'
+              className={
+                formik.errors.password && formik.touched.password && `error`
+              }
+            >
+              {formik.errors.password && formik.touched.password
+                ? formik.errors.password
+                : `Password`}
+            </label>
             <input
               type='password'
               id='password'
               name='password'
               placeholder='**********'
+              value={formik.values.password}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
             />
           </div>
 
           {/* INFORMATION ABOUT THE COMPANY */}
           <div className='form-control'>
-            <label htmlFor='company-info'>What does your Company do?</label>
-            <input type='text' id='comapany-info' name='comapany-info' />
+            <label
+              htmlFor='company-desc'
+              className={
+                formik.errors.companyDesc &&
+                formik.touched.companyDesc &&
+                `error`
+              }
+            >
+              {formik.errors.companyDesc && formik.touched.companyDesc
+                ? formik.errors.companyDesc
+                : `What does your company do?`}
+            </label>
+            <input
+              type='name'
+              id='company-desc'
+              name='companyDesc'
+              value={formik.values.companyDesc}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+            />
           </div>
 
           <button type='submit' className='gold'>
-            Sign In
+            Sign Up {loading && <img src={loader} alt='' />}
           </button>
 
           {/* KEEP ME SIGNED IN/FORGOT PASSWORD */}

@@ -9,9 +9,12 @@ import { mobileNavLinksBatch1, mobileNavLinksBatch2 } from '../../data/data';
 import { Link, useNavigate } from 'react-router-dom';
 
 const Navbar = () => {
+  const navigate = useNavigate();
   const [showNav, setShowNav] = useState(false);
   const [showProfileLinks, setShowProfileLinks] = useState(false);
-  const navigate = useNavigate();
+  const userInfo = JSON.parse(sessionStorage.getItem(`userInfo`))
+    ? JSON.parse(sessionStorage.getItem(`userInfo`))
+    : ``;
 
   return (
     <nav className='navbar' onMouseLeave={() => setShowProfileLinks(false)}>
@@ -52,7 +55,20 @@ const Navbar = () => {
                 );
               })}
             </ul>
-            <p>Sign Out</p>
+            {userInfo ? (
+              <p
+                onClick={() => {
+                  sessionStorage.removeItem(`userInfo`);
+                  navigate(`/`);
+                }}
+              >
+                Sign Out
+              </p>
+            ) : (
+              <Link to='/sign-in' className='sign-in'>
+                Sign In
+              </Link>
+            )}
           </div>
         </div>
       </div>
