@@ -4,7 +4,7 @@ import React, { useContext, useEffect, useState } from 'react';
 const AppContext = React.createContext();
 
 const AppProvider = ({ children }) => {
-  const baseURL = `https://dynamic-job-finder-api.onrender.com/api/v1`;
+  const baseURL = `https://4fb5-197-211-59-135.ngrok-free.app/api/v1`;
   const [showJobDetails, setShowJobDetails] = useState(false);
   const [applicationStep, setApplicationStep] = useState(1);
   const [lastRoute, setLastRoute] = useState(``);

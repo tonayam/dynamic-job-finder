@@ -54,7 +54,7 @@ export const UserSignUp = () => {
       setLoading(false);
       sessionStorage.setItem(`userInfo`, JSON.stringify(data));
       toast.success(`Registration Successfull`);
-      navigate(`/`);
+      navigate(`/jobs`);
     } catch (error) {
       setLoading(false);
       toast.error(error.response.data.msg);
@@ -208,7 +208,7 @@ export const EmployerSignUp = () => {
       console.log(data);
       sessionStorage.setItem(`userInfo`, JSON.stringify(data));
       toast.success(`Registration Successfull`);
-      navigate(`/`);
+      navigate(`/profile`);
     } catch (error) {
       setLoading(false);
       toast.error(error.response.data.msg);
@@ -384,7 +384,7 @@ export const UserSignIn = () => {
       setLoading(false);
       sessionStorage.setItem(`userInfo`, JSON.stringify(data));
       toast.success(`Login Successfull`);
-      navigate(`/`);
+      navigate(`/jobs`);
     } catch (error) {
       setLoading(false);
       toast.error(error.response.data.msg);
@@ -515,7 +515,7 @@ export const EmployerSignIn = () => {
       setLoading(false);
       sessionStorage.setItem(`userInfo`, JSON.stringify(data));
       toast.success(`Login Successfull`);
-      navigate(`/`);
+      navigate(`/employer-profile`);
     } catch (error) {
       setLoading(false);
       toast.error(error.response.data.msg);

@@ -6,7 +6,9 @@ import {
   UserSignIn,
 } from './Auth/Auth';
 import Home from './Home/Home';
+import Jobs from './Jobs/Jobs';
 import Profile from './Profile/Profile';
+import EmployerProfile from './Employer-Profile/EmployerProfile';
 import AccountSettings from './Account-Settings/AccountSettings';
 import MyJobs from './My-Jobs/MyJobs';
 import JobApplication from './Job-Application/JobApplication';
@@ -20,7 +22,9 @@ export {
   UserSignIn,
   UserSignUp,
   Home,
+  Jobs,
   Profile,
+  EmployerProfile,
   AccountSettings,
   MyJobs,
   JobApplication,

@@ -17,7 +17,9 @@ const Navbar = () => {
 
   return (
     <nav className='navbar' onMouseLeave={() => setShowProfileLinks(false)}>
-      <Link to='/' className='logo'></Link>
+      <Link to='/jobs' className='company-logo'>
+        <h2>Dynamic Job Finder</h2>
+      </Link>
 
       {/* DESKTOP NAV ITEMS */}
       <div className='desktop-search'>

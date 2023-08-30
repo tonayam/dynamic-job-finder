@@ -1,64 +1,184 @@
 .home-page {
-    .available-jobs-container {
-        height: calc(100vh - 40px);
-        background-color: $borderColor;
+  background-color: $primaryColor;
+  color: #fff;
+  font-family: 'Kanit', sans-serif;
 
-        .box {
-            height: 100%;
-            background-color: #fff;
-            position: relative;
+  //   navbar
+  .home-nav {
+    padding: 1rem;
 
-            .filters {
-                border: 2px solid green;
-                padding: 1rem 0;
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 100%;
-                @include flex(center, center, row);
-            }
+    .mobile {
+      @include flex(center, space-between, row);
 
-            .jobs {
-                @include flex(flex-start, space-between, row);
-                height: 100%;
-                padding-top: 4.5rem;
+      .hamburger {
+        font-size: 1.5rem;
+        @include flex(center, center, row);
 
-                .jobs-list {
-                    width: 100%;
-                    padding: 1rem 14px;
-                    overflow-y: scroll;
-                    height: 100%;
-                }
-            }
+        svg {
+          cursor: pointer;
         }
+      }
+
+      .links {
+        position: fixed;
+        top: 56.6px;
+        left: 0;
+        bottom: 0;
+        height: calc(100vh - 28.6px);
+        width: 100%;
+        background-color: $primaryColor;
+        padding: 1.5rem 0;
+        transform: translateX(100%);
+        transition: linear 0.3s all;
+        z-index: 10;
+        @include flex(flex-start, flex-start, column);
+        padding: 1rem;
+
+        &.show {
+          transform: translateX(0);
+        }
+
+        a {
+          font-size: clamp(1.1rem, 3vw, 1.3rem);
+          margin-bottom: 1rem;
+          font-weight: 500;
+        }
+      }
     }
+
+    .desktop {
+      display: none;
+    }
+  }
+
+  //   header
+  .header {
+    margin-top: 2rem;
+    padding: 2rem 14px;
+
+    .info {
+      margin-bottom: 2rem;
+      h1 {
+        font-size: clamp(2rem, 5vw, 4rem);
+        margin-bottom: 1rem;
+      }
+      p {
+        font-size: clamp(1rem, 3vw, 1.2rem);
+        line-height: 28px;
+        margin-bottom: 2rem;
+      }
+    }
+  }
 }
 
-@include for-phone-only {}
+@include for-phone-only {
+  .home-page {
+    //   navbar
+    .home-nav {
+      padding: 1rem 24px;
 
-@include for-tablet-potrait-up {}
+      .links {
+        padding: 1rem 24px;
+      }
+    }
 
-@include for-tablet-landscape-up {}
+    //   header
+    .header {
+      padding: 2rem 24px;
+    }
+  }
+}
+
+@include for-tablet-potrait-up {
+  .home-page {
+    //   navbar
+    .home-nav {
+      padding: 1rem 40px;
+
+      .mobile {
+        .links {
+          padding: 1rem 40px;
+        }
+      }
+    }
+
+    //   header
+    .header {
+      padding: 2rem 40px;
+
+      .img {
+        width: 80%;
+        margin: 0 auto;
+      }
+    }
+  }
+}
+
+@include for-tablet-landscape-up {
+  .home-page {
+    //   navbar
+    .home-nav {
+      padding: 1rem 60px;
+
+      .mobile {
+        .links {
+          padding: 1rem 60px;
+        }
+      }
+    }
+
+    //   header
+    .header {
+      padding: 2rem 60px;
+    }
+  }
+}
 
 @include for-desktop-up {
-    .home-page {
-        .available-jobs-container {
-            padding: 2rem 60px 0 60px;
-            height: calc(100vh - 80px);
+  .home-page {
+    height: 100vh;
+    // navbar
+    .home-nav {
+      @include flex(center, flex-end, row);
+      padding: 1rem;
 
-            .box {
-                .filters {
-                    border: 2px solid green;
-                }
+      .mobile {
+        display: none;
+      }
 
-                .jobs {
-                    .jobs-list {
-                        width: 40%;
-                    }
-                }
+      .desktop {
+        @include flex(center, space-between, row);
+        width: 60%;
+
+        .links {
+          a {
+            margin-left: 1rem;
+            font-weight: 500;
+
+            &:hover {
+              color: $secondaryColor;
             }
+          }
         }
+      }
     }
+
+    // header
+    .header {
+      @include flex(center, space-between, row);
+      margin-top: 4rem;
+      padding: 2rem 80px;
+
+      .info {
+        width: 50%;
+        margin-bottom: 2rem;
+      }
+      .img {
+        width: 40%;
+      }
+    }
+  }
 }
 
-@include for-big-desktop-up {}
+@include for-big-desktop-up {
+}

@@ -7,7 +7,6 @@ import {
   ApplicationSent,
   ContactUs,
   CreateJob,
-  Home,
   JobApplication,
   MyJobs,
   Profile,
@@ -15,6 +14,9 @@ import {
   EmployerSignUp,
   UserSignIn,
   EmployerSignIn,
+  Jobs,
+  Home,
+  EmployerProfile,
 } from './pages';
 import { Slide, ToastContainer } from 'react-toastify';
 import EmployerRoutes from './pages/EmployerRoutes';
@@ -25,6 +27,7 @@ function App() {
 
   useEffect(() => {
     window.scrollTo(0, 0);
+
     // eslint-disable-next-line
   }, [pathname]);
 
@@ -33,11 +36,13 @@ function App() {
       <SkeletonTheme>
         <Routes>
           <Route path='/' element={<Home />} />
+          <Route path='/jobs' element={<Jobs />} />
           <Route path='/sign-in' element={<UserSignIn />} />
           <Route path='/sign-up' element={<UserSignUp />} />
           <Route path='/sign-in/employer' element={<EmployerSignIn />} />
           <Route path='/sign-up/employer' element={<EmployerSignUp />} />
           <Route path='/my-profile' element={<Profile />} />
+          <Route path='/employer-profile' element={<EmployerProfile />} />
           <Route path='/account-settings' element={<AccountSettings />} />
           <Route path='/job-application/:id' element={<JobApplication />} />
           <Route
