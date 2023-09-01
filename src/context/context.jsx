@@ -4,7 +4,8 @@ import React, { useContext, useEffect, useState } from 'react';
 const AppContext = React.createContext();
 
 const AppProvider = ({ children }) => {
-  const baseURL = `https://4fb5-197-211-59-135.ngrok-free.app/api/v1`;
+  const baseURL = `https://dynamic-job-finder-api.onrender.com/api/v1`;
+  // const baseURL = `https://b43f-197-211-58-200.ngrok-free.app/api/v1`;
   const [showJobDetails, setShowJobDetails] = useState(false);
   const [applicationStep, setApplicationStep] = useState(1);
   const [lastRoute, setLastRoute] = useState(``);
@@ -12,6 +13,7 @@ const AppProvider = ({ children }) => {
   const [activeJob, setActiveJob] = useState(``);
   const [activeAppliedJob, setActiveAppliedJob] = useState({});
   const [activeSavedJob, setActiveSavedJob] = useState({});
+  const [showModal, setShowModal] = useState(``);
 
   const [jobApplicationInfo, setJobApplicationInfo] = useState({
     job: ``,
@@ -61,6 +63,8 @@ const AppProvider = ({ children }) => {
         setActiveSavedJob,
         jobApplicationInfo,
         setJobApplicationInfo,
+        showModal,
+        setShowModal,
       }}
     >
       {children}

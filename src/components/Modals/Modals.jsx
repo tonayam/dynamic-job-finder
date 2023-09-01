@@ -5,6 +5,9 @@ import { useFormik } from 'formik';
 import { toast } from 'react-toastify';
 import axios from 'axios';
 import loader from '../../assets/white-loader.svg';
+import * as React from 'react';
+import Box from '@mui/material/Box';
+import Modal from '@mui/material/Modal';
 
 // MODAL FOR WHEN EMPLOYER WANT TO UPDATE THEIR INFO
 export const UpdateEmployerInfoModal = ({
@@ -162,6 +165,90 @@ export const UpdateEmployerInfoModal = ({
           </div>
         </form>
       </div>
+    </div>
+  );
+};
+
+export const UpdateEmployeeInfo = ({
+  labelName,
+  infoToUpdate,
+  oldInfo,
+  setOldInfo,
+}) => {
+  const { showModal, setShowModal, baseURL } = useGlobalContext();
+  const [loading, setLoading] = useState(false);
+  const [info, setInfo] = useState(oldInfo || ``);
+  const { token, userId } = JSON.parse(sessionStorage.getItem(`userInfo`))
+    ? JSON.parse(sessionStorage.getItem(`userInfo`))
+    : ``;
+  const handleClose = () => setShowModal(``);
+
+  const style = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: `90%`,
+    maxWidth: 400,
+    bgcolor: '#fff',
+    boxShadow: 24,
+    p: 4,
+    outline: `none`,
+  };
+
+  const formData = new FormData();
+  formData.append(`${infoToUpdate}`, info);
+
+  const updateInfo = async () => {
+    try {
+      setLoading(true);
+      await axios.patch(`${baseURL}/users/${userId}`, formData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      setLoading(true);
+      setLoading(false);
+      toast.success(`Info Updated`);
+      setShowModal(``);
+      setOldInfo(``);
+    } catch (error) {
+      setLoading(false);
+    }
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    updateInfo();
+  };
+
+  return (
+    <div>
+      <Modal
+        open={showModal === `update info` && true}
+        onClose={handleClose}
+        aria-labelledby='modal-modal-title'
+        aria-describedby='modal-modal-description'
+        className='update-location'
+      >
+        <Box sx={style} className='box'>
+          <form action='' onSubmit={handleSubmit}>
+            <div className='form-control'>
+              <label htmlFor='current-location'>{labelName}</label>
+              <input
+                type='text'
+                value={info}
+                onChange={(e) => setInfo(e.target.value)}
+              />
+            </div>
+            <div className='btn-right'>
+              <button className='blue' type='submit'>
+                Update {loading && <img src={loader} alt='' />}
+              </button>
+            </div>
+          </form>
+        </Box>
+      </Modal>
     </div>
   );
 };

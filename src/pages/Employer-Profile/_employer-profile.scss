@@ -135,8 +135,10 @@
     @include flex(flex-start, space-between, row);
 
     .page-content {
-      width: 70%;
-      padding: 1rem 14px;
+      width: 75%;
+      padding: 3rem 40px;
+      height: calc(100vh - 50px);
+      overflow-y: scroll;
 
       .subscription-status {
         select {

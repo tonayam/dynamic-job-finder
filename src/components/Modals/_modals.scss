@@ -20,6 +20,7 @@
     border-radius: 10px;
     padding: 2rem 14px;
     margin-top: 4rem;
+    margin-bottom: 100px;
 
     .title-btn {
       @include flex(center, space-between, row);
@@ -44,6 +45,19 @@
 
     .btns {
       @include flex(center, center, row);
+    }
+  }
+}
+
+// MATERIAL UI MODALS
+.update-location {
+  .box {
+    .btn-right {
+      @include flex(center, flex-end, row);
+
+      button[disabled] {
+        background-color: $borderColor;
+      }
     }
   }
 }

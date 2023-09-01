@@ -9,6 +9,7 @@ import Home from './Home/Home';
 import Jobs from './Jobs/Jobs';
 import Profile from './Profile/Profile';
 import EmployerProfile from './Employer-Profile/EmployerProfile';
+import EmployerJobs from './Employer-Jobs/EmployerJobs';
 import AccountSettings from './Account-Settings/AccountSettings';
 import MyJobs from './My-Jobs/MyJobs';
 import JobApplication from './Job-Application/JobApplication';
@@ -25,6 +26,7 @@ export {
   Jobs,
   Profile,
   EmployerProfile,
+  EmployerJobs,
   AccountSettings,
   MyJobs,
   JobApplication,

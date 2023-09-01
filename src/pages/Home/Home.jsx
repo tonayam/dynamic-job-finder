@@ -6,6 +6,10 @@ import { useNavigate } from 'react-router-dom';
 
 const Home = () => {
   const navigate = useNavigate();
+  const userInfo = JSON.parse(sessionStorage.getItem(`userInfo`))
+    ? JSON.parse(sessionStorage.getItem(`userInfo`))
+    : ``;
+  const navPath = userInfo ? `/jobs` : `/sign-in`;
 
   return (
     <main className='home-page'>
@@ -18,7 +22,7 @@ const Home = () => {
             apply with ease, and propel your career forward on our user-friendly
             job posting platform.
           </p>
-          <button className='gold' onClick={() => navigate(`/sign-in`)}>
+          <button className='gold' onClick={() => navigate(navPath)}>
             Explore Jobs
           </button>
         </div>
@@ -32,6 +36,9 @@ const Home = () => {
 
 const Navbar = () => {
   const [showNav, setShowNav] = useState(false);
+  const userInfo = JSON.parse(sessionStorage.getItem(`userInfo`))
+    ? JSON.parse(sessionStorage.getItem(`userInfo`))
+    : ``;
   return (
     <nav className='home-nav'>
       {/* MOBILE */}
@@ -49,7 +56,11 @@ const Navbar = () => {
         <div className={`links ${showNav ? `show` : ``}`}>
           <Link to='/about-us'>About Us</Link>
           <Link to='/contact-us'>Contact Us</Link>
-          <Link to='/sign-in'>Log in</Link>
+          {userInfo ? (
+            <Link to='/jobs'>Jobs</Link>
+          ) : (
+            <Link to='/sign-in'>Log in</Link>
+          )}
         </div>
       </div>
 
@@ -61,7 +72,11 @@ const Navbar = () => {
         <div className='links'>
           <Link to='/about-us'>About Us</Link>
           <Link to='/contact-us'>Contact Us</Link>
-          <Link to='/sign-in'>Log in</Link>
+          {userInfo ? (
+            <Link to='/jobs'>Jobs</Link>
+          ) : (
+            <Link to='/sign-in'>Log in</Link>
+          )}
         </div>
       </div>
     </nav>

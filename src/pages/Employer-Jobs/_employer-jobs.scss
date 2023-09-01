@@ -1,0 +1,126 @@
+.employer-jobs-page {
+  .page-content {
+    padding: 1rem 14px;
+
+    .titles-section {
+      h2.title {
+        padding-bottom: 0.5rem;
+        margin-bottom: 1rem;
+        font-weight: 500;
+      }
+    }
+
+    .cards {
+      @include grid(1, 1fr, 20px);
+      margin-bottom: 2rem;
+
+      .card {
+        background-color: #fff;
+        padding: 2rem 2rem;
+        box-shadow: 2px 2px 5px 1px rgba(0, 0, 0, 0.5);
+        @include flex(flex-start, flex-start, row);
+        margin-bottom: 1rem;
+        border-radius: 5px;
+
+        .icon {
+          @include flex(center, center, row);
+          margin-right: 0.5rem;
+
+          svg {
+            font-size: 1.5rem;
+            color: $primaryColor;
+          }
+        }
+
+        .info {
+          h3 {
+            font-size: clamp(1.5rem, 4vw, 1.6rem);
+            line-height: 22px;
+            color: $primaryColor;
+          }
+          p {
+            font-size: clamp(0.9rem, 3vw, 1rem);
+            font-weight: 500;
+          }
+        }
+      }
+    }
+
+    .posted-jobs {
+      margin-top: 3rem;
+
+      .headers {
+        @include flex(center, space-between, row);
+        margin-bottom: 1.5rem;
+        h4 {
+          font-size: clamp(0.9rem, 3vw, 1.1rem);
+          font-weight: 600;
+        }
+      }
+
+      ol {
+        list-style: circle;
+        .job {
+          @include flex(center, space-between, row);
+          margin-bottom: 1.5rem;
+          border: 1px solid $borderColor;
+          padding: 0.5rem 8px;
+          border-radius: 5px;
+
+          h4 {
+            font-size: clamp(1rem, 3vw, 1.3rem);
+            font-weight: 400;
+            text-transform: capitalize;
+          }
+          p {
+            opacity: 0.9;
+          }
+        }
+      }
+    }
+  }
+}
+
+@include for-phone-only {
+  .employer-jobs-page {
+    .page-content {
+      padding: 1rem 24px;
+    }
+  }
+}
+
+@include for-tablet-potrait-up {
+  .employer-jobs-page {
+    .page-content {
+      padding: 1rem 40px;
+    }
+  }
+}
+
+@include for-tablet-landscape-up {
+  .employer-jobs-page {
+    .page-content {
+      padding: 1rem 60px;
+    }
+  }
+}
+
+@include for-desktop-up {
+  .employer-jobs-page {
+    @include flex(flex-start, space-between, row);
+
+    .page-content {
+      width: 75%;
+      height: calc(100vh - 50px);
+      overflow-y: scroll;
+      padding: 2rem 40px;
+
+      .cards {
+        @include grid(2, 1fr, 20px);
+      }
+    }
+  }
+}
+
+@include for-big-desktop-up {
+}

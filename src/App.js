@@ -17,6 +17,7 @@ import {
   Jobs,
   Home,
   EmployerProfile,
+  EmployerJobs,
 } from './pages';
 import { Slide, ToastContainer } from 'react-toastify';
 import EmployerRoutes from './pages/EmployerRoutes';
@@ -43,6 +44,7 @@ function App() {
           <Route path='/sign-up/employer' element={<EmployerSignUp />} />
           <Route path='/my-profile' element={<Profile />} />
           <Route path='/employer-profile' element={<EmployerProfile />} />
+          <Route path='/employer-jobs' element={<EmployerJobs />} />
           <Route path='/account-settings' element={<AccountSettings />} />
           <Route path='/job-application/:id' element={<JobApplication />} />
           <Route
@@ -53,7 +55,7 @@ function App() {
           <Route path='/contact-us' element={<ContactUs />} />
 
           <Route element={<EmployerRoutes />}>
-            <Route path='/create-job' element={<CreateJob />} />
+            <Route path='/post-job' element={<CreateJob />} />
           </Route>
         </Routes>
         <ToastContainer transition={Slide} />

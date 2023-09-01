@@ -17,7 +17,7 @@ const Navbar = () => {
 
   return (
     <nav className='navbar' onMouseLeave={() => setShowProfileLinks(false)}>
-      <Link to='/jobs' className='company-logo'>
+      <Link to='/' className='company-logo'>
         <h2>Dynamic Job Finder</h2>
       </Link>
 
@@ -37,27 +37,20 @@ const Navbar = () => {
           <div className={`items ${showProfileLinks ? `show` : null}`}>
             <ul>
               <li>
-                <Link to='/'>Jobs</Link>
+                <Link to='/jobs'>Jobs</Link>
               </li>
-              {userInfo && (
-                <li>
-                  <Link to='/'>company reviews</Link>
-                </li>
-              )}
-              {userInfo.role === `employer` && (
-                <li>
-                  <Link to='/create-job'>Post Job</Link>
-                </li>
-              )}
               <div className='divider'></div>
               {userInfo && (
                 <li>
-                  <Link to='/my-profile'>Profile</Link>
-                </li>
-              )}
-              {userInfo && (
-                <li>
-                  <Link to='/my-jobs'>My jobs</Link>
+                  <Link
+                    to={
+                      userInfo.role === `employer`
+                        ? `/employer-profile`
+                        : '/my-profile'
+                    }
+                  >
+                    Profile
+                  </Link>
                 </li>
               )}
               {userInfo && (
@@ -100,27 +93,31 @@ const Navbar = () => {
 
         <ul>
           <li>
-            <Link to='/'>Jobs</Link>
+            <Link to='/jobs'>Jobs</Link>
           </li>
-          {userInfo && (
-            <li>
-              <Link to='/'>company reviews</Link>
-            </li>
-          )}
-          {userInfo.role === `employer` && (
-            <li>
-              <Link to='/create-job'>Post Job</Link>
-            </li>
-          )}
           <div className='divider'></div>
           {userInfo && (
             <li>
-              <Link to='/my-profile'>Profile</Link>
+              <Link
+                to={
+                  userInfo.role === `employer`
+                    ? `/employer-profile`
+                    : '/my-profile'
+                }
+              >
+                Profile
+              </Link>
             </li>
           )}
           {userInfo && (
             <li>
-              <Link to='/my-jobs'>My jobs</Link>
+              <Link
+                to={
+                  userInfo.role === `employer` ? `/employer-jobs` : '/my-jobs'
+                }
+              >
+                My jobs
+              </Link>
             </li>
           )}
           {userInfo && (
