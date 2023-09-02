@@ -32,12 +32,12 @@ const Sidebar = ({ activePage }) => {
         >
           Account Settings
         </Link>
-        <Link
+        {/* <Link
           to='/email-notification'
           className={activePage === `email-notification` ? `active` : null}
         >
           Email Notification
-        </Link>
+        </Link> */}
       </div>
       <ul className='logout'>
         <li

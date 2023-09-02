@@ -2,14 +2,16 @@ import React, { useEffect, useState } from 'react';
 import Navbar from '../../components/Navbar/Navbar';
 import Sidebar from '../../components/Sidebar/Sidebar';
 import { BiUser } from 'react-icons/bi';
-import { RiEditCircleFill } from 'react-icons/ri';
 import { RxPlusCircled } from 'react-icons/rx';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import { useGlobalContext } from '../../context/context';
-import { UpdateEmployeeInfo } from '../../components/Modals/Modals';
+import {
+  UpdateEmployeeInfo,
+  UpdateEmployeeInfoPrimaryIndustry,
+} from '../../components/Modals/Modals';
 import { FaEdit } from 'react-icons/fa';
 import axios from 'axios';
 import loader from '../../assets/spinner-dual-ball.svg';
@@ -131,18 +133,38 @@ const Profile = () => {
 
               {/* RELEVANT INFO */}
               <div className='relevant-info'>
-                <div className='item'>
-                  <h4 className='title'>Primary Industry</h4>
-                  <div className='info'>
-                    <p>Tech</p>
+                {/* primary industry */}
+                {jobSeekerDetails.currentJobTitle ? (
+                  <div className='item'>
+                    <h4 className='title'>
+                      Primary Industry{' '}
+                      <FaEdit
+                        onClick={() => {
+                          setShowModal(`update info select`);
+                          setInfoToUpdate(`primaryIndustry`);
+                          setOldInfo(jobSeekerDetails.primaryIndustry);
+                        }}
+                      />
+                    </h4>
+                    <div className='info'>
+                      <p className='industry'>
+                        {jobSeekerDetails.primaryIndustry}
+                      </p>
+                    </div>
                   </div>
-                </div>
-                <div className='item'>
-                  <h4 className='title'>Industry Category</h4>
-                  <div className='info'>
-                    <p>Engineering</p>
+                ) : (
+                  <div className='link'>
+                    <RxPlusCircled />
+                    <span
+                      onClick={() => {
+                        setShowModal(`update info select`);
+                        setInfoToUpdate(`primaryIndustry`);
+                      }}
+                    >
+                      Add Primary Industry
+                    </span>
                   </div>
-                </div>
+                )}
 
                 {/* current job title */}
                 {jobSeekerDetails.currentJobTitle ? (
@@ -426,6 +448,13 @@ const Profile = () => {
             {showModal === `update info` && (
               <UpdateEmployeeInfo
                 labelName={labelText}
+                infoToUpdate={infoToUpdate}
+                oldInfo={oldInfo}
+                setOldInfo={setOldInfo}
+              />
+            )}
+            {showModal === `update info select` && (
+              <UpdateEmployeeInfoPrimaryIndustry
                 infoToUpdate={infoToUpdate}
                 oldInfo={oldInfo}
                 setOldInfo={setOldInfo}
