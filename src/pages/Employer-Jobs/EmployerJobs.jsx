@@ -8,6 +8,7 @@ import { BsFilePost } from 'react-icons/bs';
 import { GrDocumentVerified } from 'react-icons/gr';
 import { FaMinus, FaPlus } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
+import { ViewApplication } from '../../components/Modals/Modals';
 
 const EmployerJobs = () => {
   const navigate = useNavigate();
@@ -16,8 +17,9 @@ const EmployerJobs = () => {
   const [myJobs, setMyJobs] = useState([]);
   const [myJobApplications, setMyJobApplications] = useState([]);
   const [showJobApplicants, setShowJobApplicants] = useState(``);
+  const [specificApplication, setSpecificApplication] = useState({});
 
-  const { baseURL } = useGlobalContext();
+  const { baseURL, showModal, setShowModal } = useGlobalContext();
   const { token } = JSON.parse(sessionStorage.getItem(`userInfo`))
     ? JSON.parse(sessionStorage.getItem(`userInfo`))
     : ``;
@@ -118,7 +120,6 @@ const EmployerJobs = () => {
                       myJobApplications.totalApplications.filter(
                         (application) => application.job.id === _id
                       );
-                    console.log(applications);
                     return (
                       <div className='job' key={_id}>
                         <div
@@ -147,6 +148,10 @@ const EmployerJobs = () => {
                               return (
                                 <li
                                   key={createdBy}
+                                  onClick={() => {
+                                    setShowModal(`view application`);
+                                    setSpecificApplication(application);
+                                  }}
                                 >{`${firstName} ${lastName}`}</li>
                               );
                             })}
@@ -158,6 +163,9 @@ const EmployerJobs = () => {
                 </div>
               </div>
             </section>
+            {showModal === `view application` ? (
+              <ViewApplication specificApplication={specificApplication} />
+            ) : null}
           </>
         )}
       </main>

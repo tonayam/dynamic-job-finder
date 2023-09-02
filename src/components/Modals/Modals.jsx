@@ -170,6 +170,7 @@ export const UpdateEmployerInfoModal = ({
   );
 };
 
+// MODAL FOR WHEN JOB SEEKER WANTS TO UPDATE INFO
 export const UpdateEmployeeInfo = ({
   labelName,
   infoToUpdate,
@@ -254,6 +255,7 @@ export const UpdateEmployeeInfo = ({
   );
 };
 
+// MODAL FOR WHEN JOB SEEKER WANTS TO UPDATE PRIMARY INDUSTRY
 export const UpdateEmployeeInfoPrimaryIndustry = ({
   infoToUpdate,
   oldInfo,
@@ -358,6 +360,113 @@ export const UpdateEmployeeInfoPrimaryIndustry = ({
               </button>
             </div>
           </form>
+        </Box>
+      </Modal>
+    </div>
+  );
+};
+
+// MODAL FOR WHEN EMPLOYER WANTS TO VIEW APPLICATION
+export const ViewApplication = ({ specificApplication }) => {
+  const { showModal, setShowModal } = useGlobalContext();
+  const handleClose = () => setShowModal(``);
+
+  const style = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: `90%`,
+    maxWidth: 400,
+    bgcolor: '#fff',
+    boxShadow: 24,
+    p: 4,
+    outline: `none`,
+  };
+
+  const {
+    firstName,
+    lastName,
+    phone,
+    email,
+    city,
+    applicationReason,
+    expectedSalary,
+    noticePeriod,
+    resume,
+    coverLetter,
+  } = specificApplication;
+
+  return (
+    <div>
+      <Modal
+        open={showModal === `view application` && true}
+        onClose={handleClose}
+        aria-labelledby='modal-modal-title'
+        aria-describedby='modal-modal-description'
+        className='view-application-modal'
+      >
+        <Box sx={style} className='details'>
+          <h2 className='title'>Application Details</h2>
+
+          <div className='item name'>
+            <h4>Name</h4>
+            <p className='name'>{`${firstName} ${lastName}`}</p>
+          </div>
+
+          <div className='item'>
+            <h4>Email</h4>
+            <p>{email}</p>
+          </div>
+
+          {phone && (
+            <div className='item'>
+              <h4>Phone Number</h4>
+              <p>{phone}</p>
+            </div>
+          )}
+
+          {city && (
+            <div className='item'>
+              <h4>Location</h4>
+              <p>{city}</p>
+            </div>
+          )}
+
+          {applicationReason && (
+            <div className='item'>
+              <h4>Reason for Applying</h4>
+              <p>{applicationReason}</p>
+            </div>
+          )}
+
+          {expectedSalary && (
+            <div className='item'>
+              <h4>Expected Salary</h4>
+              <p>{String(expectedSalary).toLocaleString(`en-US`)}</p>
+            </div>
+          )}
+
+          {noticePeriod && (
+            <div className='item'>
+              <h4>Notice Period</h4>
+              <p>{noticePeriod}</p>
+            </div>
+          )}
+
+          <div className='item'>
+            <h4>Resume</h4>
+            <a href={resume} target='_blank' rel='noreferrer'>
+              View Resume
+            </a>
+          </div>
+
+          {coverLetter && (
+            <div className='item'>
+              <h4>Cover Letter</h4>
+              <p className='cover-letter'>{coverLetter}</p>
+            </div>
+          )}
         </Box>
       </Modal>
     </div>

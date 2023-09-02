@@ -17,7 +17,7 @@ const JobDetails = () => {
   const navigate = useNavigate();
   const [jobDetails, setJobDetails] = useState({ jobTitle: `` });
   const [savedJob, setSavedJob] = useState(``);
-  const { token } = JSON.parse(sessionStorage.getItem(`userInfo`))
+  const { token, role } = JSON.parse(sessionStorage.getItem(`userInfo`))
     ? JSON.parse(sessionStorage.getItem(`userInfo`))
     : ``;
 
@@ -128,42 +128,46 @@ const JobDetails = () => {
             <h6>{location}</h6>
             <h6>{new Date(createdAt).toDateString()}</h6>
           </div>
-          <div className='btns'>
-            <button
-              className='blue apply'
-              onClick={() => {
-                if (token) {
-                  navigate(`/job-application/${_id}`);
-                } else {
-                  navigate(`/sign-in`);
-                }
-              }}
-            >
-              Apply
-            </button>
-            <button
-              className='transparent save'
-              onClick={() => {
-                if (token && savedJob.length < 1) {
-                  submitSavedJob();
-                  setSaveJob(!saveJob);
-                } else if (token && savedJob.length > 0) {
-                  removeSavedJob(savedJob[0]._id);
-                  setSaveJob(!saveJob);
-                } else {
-                  navigate(`/sign-in`);
-                }
-              }}
-              type='button'
-            >
-              {savedJob.length > 0 ? `Saved` : `Save`}{' '}
-              {savedJob.length > 0 ? (
-                <BsBookmarkFill className='saved' />
-              ) : (
-                <BsBookmark />
-              )}
-            </button>
-          </div>
+          {role === `user` ? (
+            <>
+              <div className='btns'>
+                <button
+                  className='blue apply'
+                  onClick={() => {
+                    if (token) {
+                      navigate(`/job-application/${_id}`);
+                    } else {
+                      navigate(`/sign-in`);
+                    }
+                  }}
+                >
+                  Apply
+                </button>
+                <button
+                  className='transparent save'
+                  onClick={() => {
+                    if (token && savedJob.length < 1) {
+                      submitSavedJob();
+                      setSaveJob(!saveJob);
+                    } else if (token && savedJob.length > 0) {
+                      removeSavedJob(savedJob[0]._id);
+                      setSaveJob(!saveJob);
+                    } else {
+                      navigate(`/sign-in`);
+                    }
+                  }}
+                  type='button'
+                >
+                  {savedJob.length > 0 ? `Saved` : `Save`}{' '}
+                  {savedJob.length > 0 ? (
+                    <BsBookmarkFill className='saved' />
+                  ) : (
+                    <BsBookmark />
+                  )}
+                </button>
+              </div>
+            </>
+          ) : null}
         </div>
       </div>
       {/* JOB POSTING DESCRIPTION */}
