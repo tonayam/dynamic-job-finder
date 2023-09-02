@@ -6,13 +6,16 @@ import { useGlobalContext } from '../../context/context';
 import loader from '../../assets/spinner-dual-ball.svg';
 import { BsFilePost } from 'react-icons/bs';
 import { GrDocumentVerified } from 'react-icons/gr';
+import { FaMinus, FaPlus } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 
 const EmployerJobs = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
+  const [applicationsloading, setApplicationsLoading] = useState(true);
   const [myJobs, setMyJobs] = useState([]);
   const [myJobApplications, setMyJobApplications] = useState([]);
+  const [showJobApplicants, setShowJobApplicants] = useState(``);
 
   const { baseURL } = useGlobalContext();
   const { token } = JSON.parse(sessionStorage.getItem(`userInfo`))
@@ -40,10 +43,10 @@ const EmployerJobs = () => {
           Authorization: `Bearer ${token}`,
         },
       });
-      setLoading(false);
+      setApplicationsLoading(false);
       setMyJobApplications(data);
     } catch (error) {
-      setLoading(false);
+      setApplicationsLoading(false);
     }
   };
 
@@ -58,7 +61,7 @@ const EmployerJobs = () => {
       <Navbar />
       <main className='employer-jobs-page'>
         {/* PAGE CONTENT */}
-        {loading ? (
+        {loading || applicationsloading ? (
           <div className='page-loader'>
             <img src={loader} alt='' />
           </div>
@@ -108,17 +111,51 @@ const EmployerJobs = () => {
                   <h4>Jobs Posted</h4>
                 </div>
 
-                <ol>
+                <div className='jobs'>
                   {myJobs.jobs.map((job) => {
                     const { jobTitle, _id } = job;
+                    const applications =
+                      myJobApplications.totalApplications.filter(
+                        (application) => application.job.id === _id
+                      );
+                    console.log(applications);
                     return (
-                      <li className='job' key={_id}>
-                        <h4 className='title'>{jobTitle}</h4>
-                        <p></p>
-                      </li>
+                      <div className='job' key={_id}>
+                        <div
+                          className='title'
+                          onClick={() => {
+                            setShowJobApplicants(_id);
+                            if (showJobApplicants === _id) {
+                              setShowJobApplicants(``);
+                            }
+                          }}
+                        >
+                          <h4>{jobTitle}</h4>
+                          {showJobApplicants === _id ? <FaMinus /> : <FaPlus />}
+                        </div>
+                        <div
+                          className={
+                            showJobApplicants === _id
+                              ? `applicants show`
+                              : `applicants`
+                          }
+                        >
+                          <ol>
+                            {applications.map((application) => {
+                              const { firstName, lastName, createdBy } =
+                                application;
+                              return (
+                                <li
+                                  key={createdBy}
+                                >{`${firstName} ${lastName}`}</li>
+                              );
+                            })}
+                          </ol>
+                        </div>
+                      </div>
                     );
                   })}
-                </ol>
+                </div>
               </div>
             </section>
           </>
