@@ -208,7 +208,7 @@ export const EmployerSignUp = () => {
       console.log(data);
       sessionStorage.setItem(`userInfo`, JSON.stringify(data));
       toast.success(`Registration Successfull`);
-      navigate(`/profile`);
+      navigate(`/employer-profile`);
     } catch (error) {
       setLoading(false);
       toast.error(error.response.data.msg);

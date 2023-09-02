@@ -100,7 +100,11 @@ const EmployerProfile = () => {
                 <div className='item'>
                   <h4 className='title'>No of Employees</h4>
                   <div className='info'>
-                    <p>{employerDetails.noOfEmployees}</p>
+                    <p>
+                      {employerDetails.noOfEmployees
+                        ? `0 - ${employerDetails.noOfEmployees}`
+                        : `0`}
+                    </p>
                   </div>
                 </div>
 

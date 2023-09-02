@@ -134,7 +134,7 @@ const Profile = () => {
               {/* RELEVANT INFO */}
               <div className='relevant-info'>
                 {/* primary industry */}
-                {jobSeekerDetails.currentJobTitle ? (
+                {jobSeekerDetails.primaryIndustry ? (
                   <div className='item'>
                     <h4 className='title'>
                       Primary Industry{' '}

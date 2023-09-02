@@ -55,7 +55,15 @@ const Navbar = () => {
               )}
               {userInfo && (
                 <li>
-                  <Link to='/account-settings'>Account Settings</Link>
+                  <Link
+                    to={
+                      userInfo.role === `employer`
+                        ? `/employer-account-settings`
+                        : '/account-settings'
+                    }
+                  >
+                    Account Settings
+                  </Link>
                 </li>
               )}
               <li>

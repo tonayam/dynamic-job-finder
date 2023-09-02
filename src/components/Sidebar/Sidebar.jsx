@@ -27,7 +27,11 @@ const Sidebar = ({ activePage }) => {
           </Link>
         ) : null}
         <Link
-          to='/account-settings'
+          to={
+            role === `employer`
+              ? '/employer-account-settings'
+              : '/account-settings'
+          }
           className={activePage === `account-settings` ? `active` : null}
         >
           Account Settings

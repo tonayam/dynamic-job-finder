@@ -11,6 +11,7 @@ import Profile from './Profile/Profile';
 import EmployerProfile from './Employer-Profile/EmployerProfile';
 import EmployerJobs from './Employer-Jobs/EmployerJobs';
 import AccountSettings from './Account-Settings/AccountSettings';
+import EmployerAccountSettings from './Employer-Account-Settings/EmployerAccountSettings';
 import MyJobs from './My-Jobs/MyJobs';
 import JobApplication from './Job-Application/JobApplication';
 import ApplicationSent from './Job-Application/ApplicationSent';
@@ -28,6 +29,7 @@ export {
   EmployerProfile,
   EmployerJobs,
   AccountSettings,
+  EmployerAccountSettings,
   MyJobs,
   JobApplication,
   ApplicationSent,
