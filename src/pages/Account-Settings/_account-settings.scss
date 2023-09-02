@@ -1,129 +1,149 @@
 .account-settings-page {
-    .page-content {
-        margin-top: 3rem;
-        padding: 0 14px;
+  .page-content {
+    padding: 3rem 14px;
 
-        .page-title {
-            border-bottom: 1px solid $borderColor;
-            padding-bottom: 0.2rem;
-            margin-bottom: 2rem;
+    .page-title {
+      border-bottom: 1px solid $borderColor;
+      padding-bottom: 0.2rem;
+      margin-bottom: 2rem;
 
-            h2 {
-                font-size: clamp(1.4rem, 3vw, 1.6rem);
-                font-weight: 500;
-            }
-        }
-
-        .email {
-            @include flex(center, flex-start, row);
-            padding: 1rem 0;
-            margin-bottom: 2rem;
-
-            p {
-                margin-right: 0.8rem;
-                font-size: (0.9rem, 2vw, 1.1rem);
-            }
-        }
-
-        .social-connections {
-            padding: 1rem 0;
-            margin-bottom: 2rem;
-
-            h4.title {
-                font-weight: 400;
-                margin-bottom: 1.5rem;
-
-                span {
-                    font-weight: 600;
-                    @include flex(center, center, row);
-                    display: inline-flex;
-                }
-            }
-
-            .connect {
-                @include flex(center, flex-start, row);
-                margin-bottom: 1.5rem;
-
-                .img {
-                    width: 50px;
-                    height: 50px;
-                    border: 2px solid red;
-                    border-radius: 50%;
-                    margin-right: 0.8rem;
-                }
-
-                h5 {
-                    font-weight: 500;
-                    font-size: clamp(1rem, 2vw, 1.1rem);
-                }
-
-                p {
-                    font-size: clamp(0.9rem, 2vw, 1.1rem);
-                    color: blue;
-                    cursor: pointer;
-                }
-            }
-        }
-
-        .password-reset {
-            padding: 1rem 0;
-            margin-bottom: 4.5rem;
-
-            h3.title {
-                margin-bottom: 1rem;
-                font-size: clamp(1.3rem, 2vw, 1.5rem);
-                font-weight: 500;
-            }
-
-            form {
-                .form-control {
-                    margin-bottom: 1.5rem;
-                }
-            }
-        }
+      h2 {
+        font-size: clamp(1.4rem, 3vw, 1.6rem);
+        font-weight: 500;
+      }
     }
+
+    .email {
+      @include flex(center, flex-start, row);
+      padding: 1rem 0;
+      margin-bottom: 2rem;
+
+      p {
+        margin-right: 0.8rem;
+        font-size: (0.9rem, 2vw, 1.1rem);
+      }
+    }
+
+    .social-connections {
+      padding: 1rem 0;
+      margin-bottom: 2rem;
+
+      h4.title {
+        font-weight: 400;
+        margin-bottom: 1.5rem;
+
+        span {
+          font-weight: 600;
+          @include flex(center, center, row);
+          display: inline-flex;
+        }
+      }
+
+      .connect {
+        @include flex(center, flex-start, row);
+        margin-bottom: 1.5rem;
+
+        .img {
+          width: 50px;
+          height: 50px;
+          border: 2px solid red;
+          border-radius: 50%;
+          margin-right: 0.8rem;
+        }
+
+        h5 {
+          font-weight: 500;
+          font-size: clamp(1rem, 2vw, 1.1rem);
+        }
+
+        p {
+          font-size: clamp(0.9rem, 2vw, 1.1rem);
+          color: blue;
+          cursor: pointer;
+        }
+      }
+    }
+
+    .password-reset {
+      padding: 1rem 0;
+      margin-bottom: 4.5rem;
+
+      h3.title {
+        margin-bottom: 1rem;
+        font-size: clamp(1.3rem, 2vw, 1.5rem);
+        font-weight: 500;
+      }
+
+      form {
+        .form-control {
+          margin-bottom: 1.5rem;
+
+          .password-cont {
+            border: 1px solid #d0cfcf;
+            width: 100%;
+            position: relative;
+            padding-right: 0;
+            padding: 0.2rem;
+
+            input {
+              border: none;
+              width: 100%;
+            }
+
+            .reveal-btn {
+              position: absolute;
+              right: 15px;
+              @include flex(center, center, row);
+            }
+          }
+        }
+      }
+    }
+  }
 }
 
 @include for-phone-only {
-    .account-settings-page {
-        .page-content {
-            padding: 0 24px;
-        }
+  .account-settings-page {
+    .page-content {
+      padding: 0 24px;
     }
+  }
 }
 
 @include for-tablet-potrait-up {
-    .account-settings-page {
-        .page-content {
-            padding: 0 40px;
-        }
+  .account-settings-page {
+    .page-content {
+      padding: 0 40px;
     }
+  }
 }
 
 @include for-tablet-landscape-up {
-    .account-settings-page {
-        .page-content {
-            padding: 0 40px;
-        }
+  .account-settings-page {
+    .page-content {
+      padding: 0 40px;
     }
+  }
 }
 
 @include for-desktop-up {
-    .account-settings-page {
-        @include flex(flex-start, space-between, row);
+  .account-settings-page {
+    @include flex(flex-start, space-between, row);
 
-        .page-content {
-            padding: 0 40px;
-            width: 75%;
-            margin-top: 2rem;
+    .page-content {
+      width: 75%;
+      padding: 3rem 40px;
+      height: calc(100vh - 50px);
+      overflow-y: scroll;
 
-            .password-reset {
-                form {
-                    width: 50%;
-                }
-            }
+      .password-reset {
+        form {
+          width: 50%;
         }
+      }
     }
+  }
 }
 
-@include for-big-desktop-up {}
+@include for-big-desktop-up {
+}

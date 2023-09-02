@@ -105,10 +105,9 @@ const Profile = () => {
               <div className='user'>
                 <div className='img'>
                   <BiUser />
-                  <RiEditCircleFill className='edit' />
                 </div>
                 <div className='name'>
-                  <h2>John Doe</h2>
+                  <h2>{jobSeekerDetails.name}</h2>
                 </div>
               </div>
 

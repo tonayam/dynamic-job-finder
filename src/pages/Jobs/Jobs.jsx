@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import Navbar from '../../components/Navbar/Navbar';
 import { JobListingJob } from '../../components/Jobs/Jobs';
 import JobDetails from '../../components/Job-Details/JobDetails';
-import JobFilters from '../../components/Job-Filters/JobFilters';
+// import JobFilters from '../../components/Job-Filters/JobFilters';
 import { useGlobalContext } from '../../context/context';
 import { JobCardSkeleton } from '../../components/Skeleton-Loaders/SkeletonLoaders';
 

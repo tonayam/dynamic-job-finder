@@ -5,7 +5,7 @@ const AppContext = React.createContext();
 
 const AppProvider = ({ children }) => {
   const baseURL = `https://dynamic-job-finder-api.onrender.com/api/v1`;
-  // const baseURL = `https://b43f-197-211-58-200.ngrok-free.app/api/v1`;
+  // const baseURL = ` http://localhost:5000/api/v1`;
   const [showJobDetails, setShowJobDetails] = useState(false);
   const [applicationStep, setApplicationStep] = useState(1);
   const [lastRoute, setLastRoute] = useState(``);
@@ -38,6 +38,16 @@ const AppProvider = ({ children }) => {
     } catch (error) {}
   };
 
+  // FUNCTION TO REVEAL PASSWORD
+  const revealPassword = () => {
+    const passwordInput = document.querySelector(`#password`);
+    if (passwordInput.type === 'password') {
+      passwordInput.type = 'text';
+    } else {
+      passwordInput.type = 'password';
+    }
+  };
+
   useEffect(() => {
     fetchAllJobs();
     // eslint-disable-next-line
@@ -65,6 +75,7 @@ const AppProvider = ({ children }) => {
         setJobApplicationInfo,
         showModal,
         setShowModal,
+        revealPassword,
       }}
     >
       {children}

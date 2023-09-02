@@ -43,7 +43,7 @@ const Sidebar = ({ activePage }) => {
         <li
           onClick={() => {
             navigate(`/`);
-            localStorage.removeItem(`userInfo`);
+            sessionStorage.removeItem(`userInfo`);
           }}
         >
           Logout
