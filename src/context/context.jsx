@@ -14,6 +14,8 @@ const AppProvider = ({ children }) => {
   const [activeAppliedJob, setActiveAppliedJob] = useState({});
   const [activeSavedJob, setActiveSavedJob] = useState({});
   const [showModal, setShowModal] = useState(``);
+  const [searchTerm, setSearchTerm] = useState(``);
+  const [searchUrl, setSearchUrl] = useState(``);
 
   const [jobApplicationInfo, setJobApplicationInfo] = useState({
     job: ``,
@@ -32,7 +34,7 @@ const AppProvider = ({ children }) => {
 
   const fetchAllJobs = async () => {
     try {
-      const { data } = await axios.get(`${baseURL}/jobs`);
+      const { data } = await axios.get(`${baseURL}/jobs${searchUrl}`);
       setAllJobs(data.jobs);
       setActiveJob(data.jobs[0]._id);
     } catch (error) {}
@@ -51,7 +53,7 @@ const AppProvider = ({ children }) => {
   useEffect(() => {
     fetchAllJobs();
     // eslint-disable-next-line
-  }, []);
+  }, [searchUrl]);
 
   return (
     <AppContext.Provider
@@ -76,6 +78,10 @@ const AppProvider = ({ children }) => {
         showModal,
         setShowModal,
         revealPassword,
+        searchTerm,
+        setSearchTerm,
+        searchUrl,
+        setSearchUrl,
       }}
     >
       {children}
