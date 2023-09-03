@@ -142,12 +142,11 @@ const EmployerJobs = () => {
                           }
                         >
                           <ol>
-                            {applications.map((application) => {
-                              const { firstName, lastName, createdBy } =
-                                application;
+                            {applications.map((application, index) => {
+                              const { firstName, lastName } = application;
                               return (
                                 <li
-                                  key={createdBy}
+                                  key={index}
                                   onClick={() => {
                                     setShowModal(`view application`);
                                     setSpecificApplication(application);

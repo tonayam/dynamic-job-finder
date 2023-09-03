@@ -46,20 +46,26 @@ const CreateJob = () => {
   });
 
   const postJob = async () => {
+    const formData = new FormData();
+
+    formData.append(`companyName`, formik.values.companyName.toLowerCase());
+    formData.append(`jobTitle`, formik.values.jobTitle.toLowerCase());
+    formData.append(`offeredSalary`, Number(formik.values.offeredSalary));
+    formData.append(`gender`, formik.values.gender);
+    formData.append(`experience`, formik.values.experience);
+    formData.append(`qualification`, formik.values.qualification);
+    formData.append(`jobExpiration`, formik.values.jobExpiration);
+    formData.append(`location`, formik.values.location);
+    formData.append(`keywords`, formik.values.keywords);
+    formData.append(`desc`, desc);
+
     try {
       setLoading(true);
-      const response = await axios.post(
-        `${baseURL}/jobs`,
-        {
-          ...formik.values,
-          desc,
+      const response = await axios.post(`${baseURL}/jobs`, formData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
         },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      });
       console.log(response);
       setLoading(false);
       toast.success(`Jop Posted Successfully`);
@@ -167,7 +173,7 @@ const CreateJob = () => {
             >
               {formik.errors.offeredSalary && formik.touched.offeredSalary
                 ? formik.errors.offeredSalary
-                : `Offered Salary`}
+                : `Offered Salary (Naira) `}
             </label>
             <input
               type='text'

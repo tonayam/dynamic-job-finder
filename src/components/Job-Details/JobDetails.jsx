@@ -86,7 +86,7 @@ const JobDetails = () => {
   }, [activeJob]);
 
   useEffect(() => {
-    if (jobDetails && token) {
+    if (jobDetails && token && role === `user`) {
       fetchSavedJobs();
     }
     // eslint-disable-next-line

@@ -60,7 +60,6 @@ const EmployerProfile = () => {
               <div className='user'>
                 <div className='img'>
                   <BiUser />
-                  <RiEditCircleFill className='edit' />
                 </div>
                 <div className='name'>
                   <h2>{employerDetails.companyName}</h2>

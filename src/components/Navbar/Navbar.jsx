@@ -5,10 +5,11 @@ import {
   RiSearch2Line,
   RiUserLine,
 } from 'react-icons/ri';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 const Navbar = () => {
   const navigate = useNavigate();
+  const { pathname } = useLocation();
   const [showNav, setShowNav] = useState(false);
   const [showProfileLinks, setShowProfileLinks] = useState(false);
   const userInfo = JSON.parse(sessionStorage.getItem(`userInfo`))
@@ -21,16 +22,20 @@ const Navbar = () => {
         <h2>Dynamic Job Finder</h2>
       </Link>
 
-      {/* DESKTOP NAV ITEMS */}
-      <div className='desktop-search'>
-        <input
-          type='text'
-          placeholder='Search for Job titles, companies or keywords'
-        />
-        <div className='search-btn'>
-          <RiSearch2Line />
-        </div>
-      </div>
+      {pathname === `/jobs` && (
+        <>
+          {/* DESKTOP NAV ITEMS */}
+          <div className='desktop-search'>
+            <input
+              type='text'
+              placeholder='Search for Job titles, companies or keywords'
+            />
+            <div className='search-btn'>
+              <RiSearch2Line />
+            </div>
+          </div>
+        </>
+      )}
       <div className='desktop-nav-items'>
         <div className='profile' onMouseEnter={() => setShowProfileLinks(true)}>
           <RiUserLine />
