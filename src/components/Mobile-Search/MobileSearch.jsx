@@ -7,7 +7,6 @@ const MobileSearch = () => {
   const { searchTerm, setSearchTerm, baseURL, setSearchUrl } =
     useGlobalContext();
   const [inputFocus, setInputFocus] = useState(false);
-  // const [resultsHover, setResultsHover] = useState(false);
   const [searchedjobs, setSearchedJobs] = useState([]);
 
   const handleFocus = () => {
@@ -46,7 +45,7 @@ const MobileSearch = () => {
         onBlur={() => {
           setTimeout(() => {
             setInputFocus(false);
-          }, 1000);
+          }, 500);
         }}
       />
       <div className='search-btn'>
