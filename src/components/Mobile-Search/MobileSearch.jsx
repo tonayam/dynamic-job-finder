@@ -7,7 +7,7 @@ const MobileSearch = () => {
   const { searchTerm, setSearchTerm, baseURL, setSearchUrl } =
     useGlobalContext();
   const [inputFocus, setInputFocus] = useState(false);
-  const [resultsHover, setResultsHover] = useState(false);
+  // const [resultsHover, setResultsHover] = useState(false);
   const [searchedjobs, setSearchedJobs] = useState([]);
 
   const handleFocus = () => {
@@ -44,23 +44,16 @@ const MobileSearch = () => {
         onChange={(e) => setSearchTerm(e.target.value)}
         onFocus={handleFocus}
         onBlur={() => {
-          if (!resultsHover) {
+          setTimeout(() => {
             setInputFocus(false);
-          }
+          }, 1000);
         }}
       />
       <div className='search-btn'>
         <RiSearch2Line />
       </div>
       {inputFocus && (
-        <div
-          className='results'
-          onMouseEnter={() => setResultsHover(true)}
-          onMouseLeave={() => {
-            setResultsHover(false);
-            setInputFocus(false);
-          }}
-        >
+        <div className='results'>
           {searchedjobs.length > 0 ? (
             <>
               {searchedjobs.slice(0, 4).map((job) => {
