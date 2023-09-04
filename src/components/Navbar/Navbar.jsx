@@ -132,6 +132,20 @@ const Navbar = () => {
                   </Link>
                 </li>
               )}
+
+              {userInfo && (
+                <li>
+                  <Link
+                    to={
+                      userInfo.role === `employer`
+                        ? `/employer-jobs`
+                        : '/my-jobs'
+                    }
+                  >
+                    My jobs
+                  </Link>
+                </li>
+              )}
               {userInfo && (
                 <li>
                   <Link

@@ -86,14 +86,14 @@ const MyJobs = () => {
       {currentTab === `saved` && !savedJobsLoading && savedJobs.length < 1 ? (
         <div className='no-jobs-container'>
           <h3>You haven't saved any job yet.</h3>
-          <Link to='/'>Expolore Jobs</Link>
+          <Link to='/jobs'>Expolore Jobs</Link>
         </div>
       ) : currentTab === `applied` &&
         !appliedJobsLoading &&
         appliedJobs.length < 1 ? (
         <div className='no-jobs-container'>
           <h3>You haven't applied for any jobs yet.</h3>
-          <Link to='/'>Expolore Jobs</Link>
+          <Link to='/jobs'>Expolore Jobs</Link>
         </div>
       ) : (
         <div className='jobs-container'>

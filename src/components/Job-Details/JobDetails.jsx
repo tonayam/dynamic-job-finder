@@ -6,13 +6,18 @@ import { FaMoneyBill, FaGenderless } from 'react-icons/fa';
 import { GrUserExpert } from 'react-icons/gr';
 import { FcGraduationCap } from 'react-icons/fc';
 import { useGlobalContext } from '../../context/context';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { JobDetailsSkeleton } from '../Skeleton-Loaders/SkeletonLoaders';
 
 const JobDetails = () => {
-  const { setShowJobDetails, showJobDetails, activeJob, baseURL } =
-    useGlobalContext();
+  const {
+    setShowJobDetails,
+    showJobDetails,
+    activeJob,
+    setActiveJob,
+    baseURL,
+  } = useGlobalContext();
   const [saveJob, setSaveJob] = useState(false);
   const navigate = useNavigate();
   const [jobDetails, setJobDetails] = useState({ jobTitle: `` });
@@ -64,6 +69,8 @@ const JobDetails = () => {
     }
   };
 
+  const { pathname } = useLocation();
+
   // REMOVE A JOB FROM THE LIST OF SAVED JOBS
   const removeSavedJob = async (jobId) => {
     try {
@@ -72,6 +79,9 @@ const JobDetails = () => {
           Authorization: `Bearer ${token}`,
         },
       });
+      if (pathname === `/my-jobs`) {
+        window.location.reload(false);
+      }
       fetchSavedJobs();
     } catch (error) {
       console.log(error.response.data.msg);

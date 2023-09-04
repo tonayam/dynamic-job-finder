@@ -73,12 +73,6 @@ const AccountSettings = () => {
             <h2>Account Settings</h2>
           </div>
 
-          {/* EMAIL */}
-          {/* <div className='email'>
-            <p>johndoe@gmail.com</p>
-            <button className='transparent'>Change</button>
-          </div> */}
-
           {/* PASSWORD RESET */}
           <div className='password-reset'>
             <h3 className='title'>Password Reset</h3>

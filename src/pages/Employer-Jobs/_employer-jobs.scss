@@ -90,6 +90,11 @@
               display: block;
             }
 
+            .no-application {
+              @include flex(center, center, row);
+              margin-bottom: 1rem;
+            }
+
             ol {
               padding: 0.5rem 1.5rem;
               @include flex(flex-start, center, column);

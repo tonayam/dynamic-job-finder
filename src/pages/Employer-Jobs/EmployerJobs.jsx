@@ -141,20 +141,28 @@ const EmployerJobs = () => {
                               : `applicants`
                           }
                         >
-                          <ol>
-                            {applications.map((application, index) => {
-                              const { firstName, lastName } = application;
-                              return (
-                                <li
-                                  key={index}
-                                  onClick={() => {
-                                    setShowModal(`view application`);
-                                    setSpecificApplication(application);
-                                  }}
-                                >{`${firstName} ${lastName}`}</li>
-                              );
-                            })}
-                          </ol>
+                          {applications.length < 1 ? (
+                            <div className='no-application'>
+                              <p>No Applications Yet</p>
+                            </div>
+                          ) : (
+                            <>
+                              <ol>
+                                {applications.map((application, index) => {
+                                  const { firstName, lastName } = application;
+                                  return (
+                                    <li
+                                      key={index}
+                                      onClick={() => {
+                                        setShowModal(`view application`);
+                                        setSpecificApplication(application);
+                                      }}
+                                    >{`${firstName} ${lastName}`}</li>
+                                  );
+                                })}
+                              </ol>
+                            </>
+                          )}
                         </div>
                       </div>
                     );
