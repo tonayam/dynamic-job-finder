@@ -1,0 +1,102 @@
+.mobile-search {
+  @include flex(center, space-between, row);
+  border: 1px solid $borderColor;
+  border-radius: 10px;
+  position: relative;
+  margin-top: 1rem;
+  width: 95%;
+  margin: 1rem auto 1rem auto;
+
+  input {
+    border: none;
+    border-radius: 0;
+    padding: 0.6rem 1rem;
+    border: none;
+    outline: none;
+    border-radius: 10px 0 0 10px;
+    width: 100%;
+  }
+
+  .search-btn {
+    @include flex(center, center, row);
+    background-color: $primaryColor;
+    height: 100%;
+    padding: 0.5rem;
+    border-radius: 0 10px 10px 0;
+    cursor: pointer;
+
+    svg {
+      font-size: 1.5rem;
+      color: #fff;
+    }
+  }
+
+  .results {
+    position: absolute;
+    top: 95%;
+    left: 0;
+    width: 100%;
+    min-height: 10vh;
+    background-color: #fff;
+    z-index: 100;
+    border: 1px solid $borderColor;
+    padding: 2rem 1rem;
+
+    .job {
+      margin-bottom: 1rem;
+      h3 {
+        color: $textColor;
+        position: relative;
+        font-size: clamp(0.8rem, 2vw, 0.9rem);
+        font-weight: 400;
+        text-transform: capitalize;
+        font-style: italic;
+        cursor: pointer;
+        display: inline-flex;
+        z-index: 1;
+
+        &:hover {
+          color: $secondaryColor;
+        }
+      }
+    }
+
+    .no-jobs {
+      @include flex(center, center, row);
+
+      h3 {
+        color: $textColor;
+        position: relative;
+        font-size: clamp(0.8rem, 2vw, 0.9rem);
+        font-weight: 400;
+        text-transform: capitalize;
+        font-style: italic;
+        z-index: 1;
+      }
+    }
+  }
+}
+
+@include for-phone-only {
+  .mobile-search {
+    width: 90%;
+  }
+}
+
+@include for-tablet-potrait-up {
+  .mobile-search {
+    width: 90%;
+  }
+}
+
+@include for-tablet-landscape-up {
+}
+
+@include for-desktop-up {
+  .mobile-search {
+    display: none;
+  }
+}
+
+@include for-big-desktop-up {
+}

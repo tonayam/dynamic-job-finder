@@ -196,6 +196,10 @@
     height: 100%;
     transform: translateX(0);
     padding: 1.5rem 14px;
+    scrollbar-width: none;
+    &::-webkit-scrollbar {
+      display: none;
+    }
 
     .close-btn {
       display: none;

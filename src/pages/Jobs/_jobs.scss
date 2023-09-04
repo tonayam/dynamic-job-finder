@@ -8,20 +8,10 @@
       background-color: #fff;
       position: relative;
 
-      .filters {
-        border: 2px solid green;
-        padding: 1rem 0;
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        @include flex(center, center, row);
-      }
-
       .jobs {
         @include flex(flex-start, space-between, row);
         height: 100%;
-        padding-top: 4.5rem;
+        padding-top: 1.5rem;
 
         .jobs-list {
           width: 100%;
@@ -35,12 +25,45 @@
 }
 
 @include for-phone-only {
+  .jobs-page {
+    .available-jobs-container {
+      .box {
+        .jobs {
+          .jobs-list {
+            padding: 1rem 24px;
+          }
+        }
+      }
+    }
+  }
 }
 
 @include for-tablet-potrait-up {
+  .jobs-page {
+    .available-jobs-container {
+      .box {
+        .jobs {
+          .jobs-list {
+            padding: 1rem 40px;
+          }
+        }
+      }
+    }
+  }
 }
 
 @include for-tablet-landscape-up {
+  .jobs-page {
+    .available-jobs-container {
+      .box {
+        .jobs {
+          .jobs-list {
+            padding: 1rem 60px;
+          }
+        }
+      }
+    }
+  }
 }
 
 @include for-desktop-up {
@@ -50,11 +73,8 @@
       height: calc(100vh - 80px);
 
       .box {
-        .filters {
-          border: 2px solid green;
-        }
-
         .jobs {
+          padding-top: 2rem;
           .jobs-list {
             width: 40%;
           }
